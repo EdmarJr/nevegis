@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>Exemplo - sem JQuery</title>
+	<script src="ICPBravoAPIMini-1.33.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+		var toSign = "SGVsbG8sIFdvcmxkIQ==";
+	
+		function onAppletLoaded() {
+			icpBravoApplet.setFilterICPBrasil(true);
+			var certs = icpBravoApplet.loadCertificates();
+			for (i = 0; i < certs.length; i++) {
+				adicionaCertificado(i, certs[i]);
+			}
+		}
+
+		function adicionaCertificado(index, name) {
+			var select = document.getElementById("certificateSelect");
+			select.options[select.options.length] = new Option(name, index);
+		}
+		
+		function onAssinarButtonClick() {
+			var select = document.getElementById("certificateSelect");
+			var selectedCert = select.options[select.selectedIndex].value;
+			var cert = icpBravoApplet.getCertificateProperties(selectedCert);
+			var signature = icpBravoApplet.signSimpleBytes(selectedCert, toSign);
+			alert("Certificate:\r\n" + cert);
+			alert("Signature:\r\n" + signature);
+		}
+	</script>
+</head>
+<body>
+<select id='certificateSelect'></select>
+<input type="button" value="Assinar" onclick="javascript: onAssinarButtonClick();" />
+<script type="text/javascript">
+	icpBravoApplet.start({
+		appletUrl: 'ICPBravoAPIMini-1.33.jar',
+		onLoad: onAppletLoaded
+	});
+</script>
+</body>
+</html>

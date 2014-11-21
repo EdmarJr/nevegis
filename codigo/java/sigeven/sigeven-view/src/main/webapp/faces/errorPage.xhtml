@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+		
+		<ui:define name="title"><h:outputText value="#{msg['error.page.mensagem']}" /></ui:define>
+		<ui:define name="content">
+		
+		<div class="titulos"><h:outputText value="#{msg['error.page.mensagem']}" /></div><br/>
+			<p:fieldset legend="#{msg['botao.detalhar']}" toggleable="true" toggleSpeed="500" collapsed="true" style="padding:0">
+				<b>Causa:</b>#{causa}
+				<br/>
+				<b>Stack:</b> <br /> #{stack}
+			</p:fieldset>
+			
+			<!-- Este dialog é apenas para contornar um bug do primefaces 4 que impede a contração do fieldset -->
+			<p:dialog></p:dialog>
+	</ui:define>
+</ui:composition>
+		

@@ -1,0 +1,97 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+	<ui:define name="title">#{msg['tipo.evento.incluir.titulo']}</ui:define>	
+	<ui:define name="content">
+	
+		<h2>
+			#{msg['tipo.evento.incluir.titulo']}
+		</h2>		
+		
+		<h:form id="formIncluir" styleClass="form-horizontal">
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<!-- Inicio linha input -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="tipoEvento"
+								value="#{msg['tipo.evento.label.tipoEvento']}"
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="tipoEvento" 
+								value="#{tipoEventoController.tipoEvento.nome}" size="30"
+								maxlength="100" required="true"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}" />
+							<h:message for="tipoEvento" style="color: red;" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="descricao" value="#{msg['label.descricao']}"
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputTextarea id="descricao" maxlength="200"
+								value="#{tipoEventoController.tipoEvento.descricao}" />
+						</div>
+						<h:message for="descricao" style="color: red;" />
+					</div>
+
+					<div class="form-inline">
+							<div class="col-sm-3 control-label">
+							<p:outputLabel for="status" value="#{msg['label.status']}"
+								style="float:right;" />
+								</div>
+								<div class="col-sm-9">
+							<p:selectOneRadio id="status"
+								value="#{tipoEventoController.tipoEvento.ativo}" required="true"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}">
+								<f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+							</p:selectOneRadio>
+							</div>
+						
+					</div>
+					<h:message for="status" style="color: red;" />
+				</div>
+
+
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnSalvar" value="#{msg['botao.salvar']}"
+						ajax="true"
+						action="#{tipoEventoController.comandoIncluir()}"
+						update=":formIncluir dialogMensagem" />
+					<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+						ajax="false" action="incluir" immediate="true" />
+					<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}"
+						ajax="false" action="consultar" immediate="true" />
+				</h:panelGroup>
+
+			</p:panel>
+
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" visible="true"
+					widgetVar="dialogMensagem"
+					rendered="#{tipoEventoController.exibeMensagem}">
+					<h:outputText value="#{tipoEventoController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							rendered="#{tipoEventoController.sucesso}" ajax="false"
+							action="consultar" immediate="true" />
+						<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}"
+							rendered="#{!tipoEventoController.sucesso}" ajax="true"
+							onclick="dialogMensagem.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+		</h:form> 		 
+	
+	</ui:define>
+</ui:composition>

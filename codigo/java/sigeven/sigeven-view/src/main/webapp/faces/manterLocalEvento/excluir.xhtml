@@ -1,0 +1,85 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+		<ui:define name="title">#{msg['local.evento.excluir.titulo']}</ui:define>
+		
+		<ui:define name="content">
+		
+		<h2>
+			#{msg['local.evento.excluir.titulo']}
+		</h2>		
+		
+			<h:form id="formExcluir">
+				<p:panel>
+					<h:panelGrid columns="3" cellpadding="10">
+						<p:outputLabel for="tipoEvento" value="#{msg['tipo.evento.label.tipoEvento']}" style="float:right;"/>
+						<p:inputText 
+							id="tipoEvento" 
+							value="#{tipoEventoController.tipoEvento.nome}" 
+							size="30" 
+							disabled="true"
+							requiredMessage="#{msg['msg.campo.obrigatorio']}"/>
+						<h:message for="tipoEvento" style="color: red;" />
+						
+						<p:outputLabel for="descricao" value="#{msg['label.descricao']}" style="float:right;"/>
+						<p:inputTextarea 
+							id="descricao" 
+							value="#{tipoEventoController.tipoEvento.descricao}" 
+							disabled="true" />
+						<h:message for="descricao" style="color: red;" />
+			
+						<p:outputLabel for="status" value="#{msg['label.status']}" style="float:right;"/>
+						<p:selectOneRadio 
+							id="status" 
+							value="#{tipoEventoController.tipoEvento.ativo}" 
+							disabled="true"
+							requiredMessage="#{msg['msg.campo.obrigatorio']}">  
+				            <f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+				            <f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+        				</p:selectOneRadio>
+        				<h:message for="status" style="color: red;" />
+        				
+					</h:panelGrid>
+					
+   					<h:panelGroup style="display:block; text-align:center">
+           				<p:commandButton id="btnConcluir" value="#{msg['botao.concluir']}" ajax="true" oncomplete="dialogConfirmarExcluir.show()"/>
+           				<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}" ajax="false" action="consultar" immediate="true"/>
+       				</h:panelGroup>
+       				
+				</p:panel>
+				
+				<p:outputPanel id="dialogConfirmar" layout="block">
+					<p:dialog header="Mensagem" widgetVar="dialogConfirmarExcluir" modal="true">
+					<h:outputText value="#{msg['msg.msg003.confirmarexclusao']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnConfirmar" value="#{msg['botao.confirmar']}" ajax="true" action="#{tipoEventoController.comandoExcluirSalvar()}" oncomplete="dialogConfirmarExcluir.hide()" update=":formExcluir dialogMensagem" />
+						<p:commandButton id="btnCancelar2" value="#{msg['botao.cancelar']}" ajax="true" oncomplete="dialogConfirmarExcluir.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+				
+				<p:outputPanel id="dialogMensagem" layout="block">
+					<p:dialog header="Mensagem" modal="true" visible="true" rendered="#{tipoEventoController.exibeMensagem}">
+					<h:outputText value="#{msg['msg.msg004.exclusaosucesso']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOk" value="#{msg['botao.ok']}" ajax="false" action="consultar" immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+				
+				<p:outputPanel id="dialogMensagemNaoExcluida" layout="block">
+					<p:dialog header="Mensagem" modal="true" visible="true" rendered="#{tipoEventoController.exibeMensagemNaoExclusao}">
+					<h:outputText value="#{msg['msg.msg033.impossivelExcluirtipoevento']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOk2" value="#{msg['botao.ok']}" ajax="false" action="consultar" immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+			</h:form>
+	</ui:define>			
+</ui:composition>

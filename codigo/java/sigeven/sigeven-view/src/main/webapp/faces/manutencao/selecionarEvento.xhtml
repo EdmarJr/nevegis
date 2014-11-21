@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['evento.consultar.titulo']}</ui:define>
+	<style type="text/css">
+.ui-panelgrid td {
+	border-width: 0;
+}
+</style>
+	<ui:define name="content">
+	<h2>
+			#{msg['manutencao.selecionar.evento.titulo']}
+		</h2>		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:fieldset
+				style="padding-bottom: 3%;">
+				
+				<p:selectOneListbox id="eventos" style="width : 100%;" required="true" converter="eventoConverter" requiredMessage="#{msg['manutencao.selecione.evento.required.evento']}"
+					value="#{manutencaoController.evento}">
+					<f:selectItem itemValue="#{null}"
+						itemLabel="#{msg['combo.selecione']}" noSelectionOption="true" />
+					<f:selectItems var="evento" itemLabel="#{evento.nome}" itemValue="#{evento}" value="#{manutencaoController.eventos}" />
+				</p:selectOneListbox>
+				
+			</p:fieldset>
+			<p:commandButton styleClass="btn btn-primary" value="#{msg['manutencao.label.botao.manter.orgaos']}"
+				action="#{manutencaoController.comandoManterOrgaos()}" ajax="false" />
+
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+

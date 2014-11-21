@@ -1,0 +1,285 @@
+Received: from mx.veriz.com.br (192.168.210.25) by
+ VRZHUBVP02.getmessenger.veriz.com.br (172.16.210.30) with Microsoft SMTP
+ Server id 14.3.123.3; Fri, 25 Jul 2014 11:55:56 -0300
+Received: from vrzbasp01 (localhost [127.0.0.1])	by mx.veriz.com.br (Postfix)
+ with ESMTP id 38F387810B9	for <carlos.gurgel@ctis.com.br>; Fri, 25 Jul 2014
+ 12:21:09 -0300 (BRT)
+Received: from mx.veriz.com.br (localhost [127.0.0.1])	by mx.veriz.com.br
+ (Postfix) with ESMTP	for <carlos.gurgel@ctis.com.br>; Fri, 25 Jul 2014
+ 12:21:09 -0300 (BRT)
+Received: from mx1.stj.gov.br (unknown [186.215.82.200])	by mx.veriz.com.br
+ (Postfix) with ESMTPS id B3C7B7A084F	for <carlos.gurgel@ctis.com.br>; Fri, 25
+ Jul 2014 15:21:08 +0000 (UTC)
+Received: from correio.stj.jus.br (unknown [10.12.0.187]) by mx1.stj.gov.br
+ with smtp	(TLS: TLSv1/SSLv3,128bits,AES128-SHA)	 id
+ 1661_6613_bdaf0477_d0a7_4c8a_ac98_136aefd5edc0;	Fri, 25 Jul 2014 11:55:55
+ -0300
+Received: from MAILBOXSTJ.stj.gov.br ([fe80::580d:f090:fbac:fa69]) by
+ hubcas2.stj.gov.br ([10.12.0.187]) with mapi; Fri, 25 Jul 2014 11:55:54 -0300
+From: Carlos Eduardo Rodrigues <crodrigu@stj.jus.br>
+To: "carlos.gurgel@ctis.com.br" <carlos.gurgel@ctis.com.br>
+Date: Fri, 25 Jul 2014 11:55:53 -0300
+Subject: RES: Plano de Projetos Atualizado do Sigeven
+Thread-Topic: Plano de Projetos Atualizado do Sigeven
+Thread-Index: Ac+nYAPQo9T+fqkTS/2p6zOHlMuooAAuH4kg
+Message-ID: <245A3B1ADEFB6746A425B6EB1E14578151C5C1FA71@MAILBOXSTJ.stj.gov.br>
+References: <3574FE9277EA394F81FA9CC76F07C16F4FAAA321@vrzmbxfp01>
+In-Reply-To: <3574FE9277EA394F81FA9CC76F07C16F4FAAA321@vrzmbxfp01>
+Accept-Language: pt-BR
+Content-Language: pt-BR
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: pt-BR
+Content-Type: multipart/alternative;
+	boundary="_000_245A3B1ADEFB6746A425B6EB1E14578151C5C1FA71MAILBOXSTJstj_"
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.0 cv=Yrp0t/kX c=1 sm=1 a=V45q4oGSZdA/4OwLndQPJw==:17
+	a=iCsF7301D7QA:10 a=xqWC_Br6kY4A:10 a=W3ugxqmXAAAA:8 a=_MF58EXZAAAA:8
+	a=IPrJz8YlAAAA:8 a=U7qKJfkVH4P-tgSoHFQA:9 a=wPNLvfGTeEIA:10
+	a=S2ylr8MxSVMA:10 a=yMhMjlubAAAA:8 a=SSmOFEACAAAA:8 a=UiCQ7L4-1S4A:10
+	a=hTZeC7Yk6K0A:10 a=frz4AuCg-hUA:10 a=tXsnliwV7b4A:10 a=88iOIa0oUAYA:10
+	a=V45q4oGSZdA/4OwLndQPJw==:117
+X-mxHero-ExternalAntispam: rule=3;spam=false
+Sender: <crodrigu@stj.jus.br>
+Return-Path: crodrigu@stj.jus.br
+X-MS-Exchange-Organization-AuthSource: VRZHUBVP02.getmessenger.veriz.com.br
+X-MS-Exchange-Organization-AuthAs: Anonymous
+MIME-Version: 1.0
+
+--_000_245A3B1ADEFB6746A425B6EB1E14578151C5C1FA71MAILBOXSTJstj_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Em princ=EDpio est=E1 ok.
+
+Att.
+
+Carlos Rodrigues
+____________________________________
+Se=E7=E3o de Solu=E7=F5es para Ministros e Julgamento
+(61) 3319-9953
+
+De: carlos.gurgel@ctis.com.br [mailto:carlos.gurgel@ctis.com.br]
+Enviada em: quinta-feira, 24 de julho de 2014 14:00
+Para: Carlos Eduardo Rodrigues
+Cc: diego.ferraco@rsinet.com.br
+Assunto: Plano de Projetos Atualizado do Sigeven
+
+
+Bom Dia Carlos,
+
+
+
+Segue o plano de projetos atualizado do SIGEVEN para reveres. Gostaria dos =
+seus coment=E1rios at=E9 sexta (25/04), quando faremos a entrega dos casos =
+de uso da elabora=E7=E3o 7 e a nova vers=E3o do documento de requisitos.
+
+
+
+Segue em anexo a planilha que utilizamos como base para discuss=E3o de onte=
+m, para servir de hist=F3rico.
+
+
+
+Cumprimentos,
+
+Carlos Gurgel
+Gerente de Projetos - STJ
+CTIS Tecnologia S/A
+F=E1brica de Software DF2
+Comercial: (61)3319-8853
+Celular: (61)8232-4923
+carlos.gurgel@ctis.com.br<mailto:carlos.gurgel@ctis.com.br>
+www.ctis.com.br<http://www.ctis.com.br/>
+
+Esta mensagem, incluindo seus anexos, =E9 confidencial e seu conte=FAdo =E9=
+ restrito ao seu destinat=E1rio. Caso tenha recebido por engano, favor reto=
+rn=E1-la ao destinat=E1rio e apag=E1-la de seus arquivos. =C9 expressamente=
+ proibido o uso n=E3o autorizado, replica=E7=E3o ou dissemina=E7=E3o da mes=
+ma, podendo haver san=E7=F5es disciplinares, c=EDvel e criminal. As opini=
+=F5es contidas nesta mensagem e seus anexos n=E3o necessariamente refletem =
+a opini=E3o da Companhia. A CTIS agradece a colabora=E7=E3o.
+____
+____
+
+
+Esta mensagem, incluindo seus anexos, =E9 confidencial e seu conte=FAdo =E9=
+ restrito ao seu destinat=E1rio. Caso tenha recebido por engano, favor reto=
+rn=E1-la ao destinat=E1rio e apag=E1-la de seus arquivos. =C9 expressamente=
+ proibido o uso n=E3o autorizado, replica=E7=E3o ou dissemina=E7=E3o da mes=
+ma, podendo haver san=E7=F5es disciplinares, c=EDvel e criminal. As opini=
+=F5es contidas nesta mensagem e seus anexos n=E3o necessariamente refletem =
+a opini=E3o da Companhia. A CTIS agradece a colabora=E7=E3o.
+
+--_000_245A3B1ADEFB6746A425B6EB1E14578151C5C1FA71MAILBOXSTJstj_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head><meta name=3D"Generator" content=3D"Micro=
+soft Word 14 (filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p
+	{mso-style-priority:99;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.EstiloDeEmail19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3D"PT-BR" link=3D"blue"=
+ vlink=3D"purple"><div class=3D"WordSection1"><p class=3D"MsoNormal"><span =
+style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&=
+quot;;color:#1F497D">Em princ=EDpio est=E1 ok.<o:p></o:p></span></p><p clas=
+s=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&q=
+uot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span></p><p c=
+lass=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Calibr=
+i&quot;,&quot;sans-serif&quot;;color:#1F497D">Att.<o:p></o:p></span></p><p =
+class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Calib=
+ri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span></p>=
+<div><p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:=
+&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D">Carlos Rodrigues<=
+o:p></o:p></span></b></p><p class=3D"MsoNormal"><span style=3D"font-size:11=
+.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D">=
+____________________________________<o:p></o:p></span></p><p class=3D"MsoNo=
+rmal"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot=
+;sans-serif&quot;;color:#1F497D">Se=E7=E3o de Solu=E7=F5es para Ministros e=
+ Julgamento<o:p></o:p></span></p><p class=3D"MsoNormal"><span style=3D"font=
+-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#=
+1F497D">(61) 3319-9953</span><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p></o:p></span><=
+/p></div><p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family=
+:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p=
+></span></p><div><div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;p=
+adding:3.0pt 0cm 0cm 0cm"><p class=3D"MsoNormal"><b><span style=3D"font-siz=
+e:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">De:</span><=
+/b><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;san=
+s-serif&quot;"> carlos.gurgel@ctis.com.br [mailto:carlos.gurgel@ctis.com.br=
+] <br><b>Enviada em:</b> quinta-feira, 24 de julho de 2014 14:00<br><b>Para=
+:</b> Carlos Eduardo Rodrigues<br><b>Cc:</b> diego.ferraco@rsinet.com.br<br=
+><b>Assunto:</b> Plano de Projetos Atualizado do Sigeven<o:p></o:p></span><=
+/p></div></div><p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p><div><p><span st=
+yle=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quo=
+t;;color:black">Bom Dia Carlos, <o:p></o:p></span></p><p><span style=3D"fon=
+t-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:b=
+lack">&nbsp;<o:p></o:p></span></p><p><span style=3D"font-size:10.0pt;font-f=
+amily:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:black">Segue o plano =
+de projetos atualizado do&nbsp;SIGEVEN para reveres. Gostaria dos seus come=
+nt=E1rios at=E9 sexta (25/04), quando faremos a entrega dos casos de uso da=
+ elabora=E7=E3o 7 e a nova vers=E3o do documento de requisitos.&nbsp; <o:p>=
+</o:p></span></p><p><span style=3D"font-size:10.0pt;font-family:&quot;Tahom=
+a&quot;,&quot;sans-serif&quot;;color:black">&nbsp;<o:p></o:p></span></p><p>=
+<span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-s=
+erif&quot;;color:black">Segue em anexo a planilha&nbsp;que utilizamos como =
+base para discuss=E3o de ontem, para servir de hist=F3rico.<o:p></o:p></spa=
+n></p><p><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&qu=
+ot;sans-serif&quot;;color:black">&nbsp;<o:p></o:p></span></p><p><span style=
+=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;=
+color:black">Cumprimentos, <o:p></o:p></span></p><p><strong><span style=3D"=
+font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;colo=
+r:#333333">Carlos Gurgel</span></strong><span style=3D"font-size:10.0pt;fon=
+t-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:black"><o:p></o:p>=
+</span></p><div><div><div><p class=3D"MsoNormal"><span style=3D"font-size:7=
+.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;;color:#999999">=
+Gerente de Projetos - STJ</span><span style=3D"font-size:10.0pt;font-family=
+:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:black"><o:p></o:p></span><=
+/p></div><div><p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-fa=
+mily:&quot;Verdana&quot;,&quot;sans-serif&quot;;color:#999999">CTIS Tecnolo=
+gia S/A</span><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot=
+;,&quot;sans-serif&quot;;color:black"><o:p></o:p></span></p></div><div><p c=
+lass=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Verdana=
+&quot;,&quot;sans-serif&quot;;color:#999999">F=E1brica de Software DF2</spa=
+n><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans=
+-serif&quot;;color:black"><o:p></o:p></span></p></div><div><p class=3D"MsoN=
+ormal"><span style=3D"font-size:7.5pt;font-family:&quot;Verdana&quot;,&quot=
+;sans-serif&quot;;color:#999999">Comercial: (61)3319-8853</span><span style=
+=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;=
+color:black"><o:p></o:p></span></p></div><div><p class=3D"MsoNormal"><span =
+style=3D"font-size:7.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&q=
+uot;;color:#999999">Celular: (61)8232-4923</span><span style=3D"font-size:1=
+0.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:black"><o=
+:p></o:p></span></p></div><div><p class=3D"MsoNormal"><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:blac=
+k"><a href=3D"mailto:carlos.gurgel@ctis.com.br"><span style=3D"font-size:7.=
+5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">carlos.gurgel@c=
+tis.com.br</span></a><o:p></o:p></span></p></div><div><p class=3D"MsoNormal=
+"><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans=
+-serif&quot;;color:black"><a href=3D"http://www.ctis.com.br/" target=3D"_bl=
+ank"><span style=3D"font-size:7.5pt;font-family:&quot;Verdana&quot;,&quot;s=
+ans-serif&quot;">www.ctis.com.br</span></a><o:p></o:p></span></p></div><div=
+><p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;T=
+ahoma&quot;,&quot;sans-serif&quot;;color:black">&nbsp;<o:p></o:p></span></p=
+></div><div><div><p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font=
+-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#666666">Esta mens=
+agem, incluindo seus anexos, =E9 confidencial e seu conte=FAdo =E9 restrito=
+ ao seu destinat=E1rio. Caso tenha recebido por engano, favor retorn=E1-la =
+ao destinat=E1rio e apag=E1-la de seus arquivos. =C9 expressamente proibido=
+ o uso n=E3o autorizado, replica=E7=E3o ou dissemina=E7=E3o da mesma, poden=
+do haver san=E7=F5es disciplinares, c=EDvel e criminal. As opini=F5es conti=
+das nesta mensagem e seus anexos n=E3o necessariamente refletem a opini=E3o=
+ da Companhia. A CTIS agradece a colabora=E7=E3o.</span><span style=3D"font=
+-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:bl=
+ack"><o:p></o:p></span></p></div><div><p class=3D"MsoNormal"><span style=3D=
+"font-size:9.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;col=
+or:#666666">____</span><span style=3D"font-size:10.0pt;font-family:&quot;Ta=
+homa&quot;,&quot;sans-serif&quot;;color:black"><o:p></o:p></span></p></div>=
+<div><p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quo=
+t;Calibri&quot;,&quot;sans-serif&quot;;color:#666666">____</span><span styl=
+e=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;=
+;color:black"><o:p></o:p></span></p></div></div></div></div></div><p class=
+=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-size:9.0p=
+t;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#666666"><o:=
+p>&nbsp;</o:p></span></p><p><span style=3D"font-size:9.0pt;font-family:&quo=
+t;Calibri&quot;,&quot;sans-serif&quot;;color:#666666">Esta mensagem, inclui=
+ndo seus anexos, =E9 confidencial e seu conte=FAdo =E9 restrito ao seu dest=
+inat=E1rio. Caso tenha recebido por engano, favor retorn=E1-la ao destinat=
+=E1rio e apag=E1-la de seus arquivos. =C9 expressamente proibido o uso n=E3=
+o autorizado, replica=E7=E3o ou dissemina=E7=E3o da mesma, podendo haver sa=
+n=E7=F5es disciplinares, c=EDvel e criminal. As opini=F5es contidas nesta m=
+ensagem e seus anexos n=E3o necessariamente refletem a opini=E3o da Companh=
+ia. A CTIS agradece a colabora=E7=E3o.<o:p></o:p></span></p></div></body></=
+html>=
+
+--_000_245A3B1ADEFB6746A425B6EB1E14578151C5C1FA71MAILBOXSTJstj_--

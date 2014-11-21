@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="title">#{msg['manter.orgao.cargo.label.visualizar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<style type="text/css">
+.ui-panelgrid td {
+	border-width: 0;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['manter.orgao.cargo.label.visualizar.titulo']}</h2>
+		</div>
+	<div class="clearfix"></div>
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+
+			<p:fieldset>
+				<p:panelGrid id="panelGrid1" columns="2" style="width : 100%;">
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cargo']}"
+						for="cargo" />
+					<h:outputText id="cargo" 
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.cargo.nome}"/>
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.nome.orgao']}" for="orgao" />
+					<h:outputText id="orgao"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.nome}"/>
+						
+				</p:panelGrid>
+				<p:panelGrid id="panelGrid2" columns="2" style="width : 100%;">
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.sigla.orgao']}"
+						for="siglaOrgao" />
+					<h:outputText id="siglaOrgao"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.sigla}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.tipo.orgao']}"
+						for="tipoOrgao" />
+					<h:outputText id="tipoOrgao"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.tipoOrgao.nome}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.poder.area']}"
+						for="poderArea" />
+					<h:outputText id="poderArea"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.poderArea.nome}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.esfera']}"
+						for="esfera" />
+					<h:outputText id="esfera"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.esfera.nome}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.endereco.orgao']}"
+						for="endereco" />
+					<h:outputText id="endereco"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.endereco}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.complemento']}"
+						for="complemento" />
+					<h:outputText id="complemento"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.complementoEndereco}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.bairro']}"
+						for="bairro" />
+					<h:outputText id="bairro"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.bairro}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.uf']}"
+						for="uf" />
+					<h:outputText id="uf"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.uf}"/>
+						
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cidade']}"
+						for="cidade" />
+					<h:outputText id="cidade"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cidade}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cep']}"
+						for="cep" />
+					<h:outputText id="cep"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cep}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.telefone.comercial']}"
+						for="telefoneComercial" />
+					<h:outputText id="telefoneComercial"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.telefoneComercial}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.celular.funcional']}"
+						for="celularFuncional" />
+					<h:outputText id="celularFuncional"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.fax}" />					
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.email']}"
+						for="email" />
+					<h:outputText id="email"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.email}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.pagina.internet']}"
+						for="paginaInternet" />
+					<h:outputText id="paginaInternet"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.paginaInternet}" />					
+				</p:panelGrid>
+
+				<p:commandButton value="#{msg['botao.voltar']}" ajax="false"
+					action="#{alteracaoCargoOrgaoController.concluir()}" />
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,630 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['pesquisa.avancada.participante.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<style type="text/css">
+.datatable {
+	overflow-x: scroll;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['pesquisa.avancada.participante.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+
+			<!-- INICIO DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<!-- INÍCIO INPUTTEXT NOME DO PARTICIPANTE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nome.participante']}"
+								for="nomeparticipante" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="nomeparticipante" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT NOME DO PARTICIPANTE -->
+					
+					<!-- INÍCIO INPUTTEXT TÍTULO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.titulo']}"
+								for="titulo" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="titulo" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT TÍTULO -->
+					
+					<!-- INÍCIO SELECTONERADIO SITUACAO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.situacao']}" for="situacao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="situacao"
+								value="#{consultaConvidadoController.filtro.situacao}">
+								<f:selectItems
+									value="#{consultaConvidadoController.ativoAposentadoEnum}"
+									var="situacao" itemLabel="#{msg[situacao.label]}"
+									itemValue="#{situacao.valor}" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- FIM SELECTONERADIO SITUACAO -->
+					
+					<!-- INÍCIO SELECTONERADIO SEXO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.sexo']}" for="sexo" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="sexo"
+								value="#{consultaConvidadoController.filtro.sexo}"
+								converter="sexoConverter">
+								<f:selectItems
+									value="#{consultaConvidadoController.sexoMasculinoFemininoEnum}"
+									var="sexo" itemLabel="#{msg[sexo.label]}"
+									itemValue="#{sexo.valor}" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- FIM SELECTONERADIO SEXO -->
+					
+					<!-- INÍCIO SELECTONEMENU TRATAMENTO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.tratamento']}" for="tratamento" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="tratamento">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />								
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU TRATAMENTO -->
+					
+					<!-- INÍCIO INPUTTEXT NASCIMENTO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nascimento']}"
+								for="nascimento" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="nascimento" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT NASCIMENTO -->
+					
+					<!-- INÍCIO INPUTTEXT NOME DO CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nome.conjuge']}"
+								for="nomeconjuge" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="nomeconjuge" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT NOME DO CÔNJUGE -->
+					
+					<!-- INÍCIO SELECTONERADIO O CÔNJUGE É UMA AUTORIDADE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.conjugeautoridade']}" for="conjugeautoridade" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="conjugeautoridade"
+								value="#{consultaConvidadoController.filtro.situacao}">
+								<f:selectItems
+									value="#{consultaConvidadoController.simNaoEnum}"
+									var="simnao" itemLabel="#{msg[simnao.label]}"
+									itemValue="#{simnao.valor}" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- FIM SELECTONERADIO O CÔNJUGE É UMA AUTORIDADE -->
+					
+					<!-- INÍCIO INPUTTEXT TÍTULO DO CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.tituloconjuge']}"
+								for="tituloconjuge" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="tituloconjuge" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT TÍTULO DO CÔNJUGE -->
+					
+					<!-- INÍCIO INPUTTEXT CARGO DO CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cargoconjuge']}"
+								for="cargoconjuge" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="cargoconjuge" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT CARGO DO CÔNJUGE -->
+					
+					<!-- INÍCIO INPUTTEXT ÓRGÃO DO CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.orgaoconjuge']}"
+								for="orgaoconjuge" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="orgaoconjuge" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT ÓRGÃO DO CÔNJUGE -->
+					
+					
+					<!-- INÍCIO INPUTTEXT ENDEREÇO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.endereco']}"
+								for="endereco" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="endereco" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT ENDEREÇO -->
+					
+					<!-- INÍCIO INPUTTEXT COMPLEMENTO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.complemento']}"
+								for="complemento" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="complemento" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT COMPLEMENTO -->
+					
+					<!-- INÍCIO INPUTTEXT BAIRRO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.bairro']}"
+								for="bairro" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="bairro" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT BAIRRO -->
+					
+					<!-- INÍCIO INPUTTEXT CIDADE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cidade']}"
+								for="cidade" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="cidade" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT CIDADE -->
+					
+					<!-- INÍCIO INPUTTEXT UF -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.uf']}"
+								for="uf" />
+						</div>
+						<div class="col-sm-2">
+							<p:inputText maxlength="150" id="uf" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT UF -->
+					
+					<!-- INÍCIO INPUTTEXT CEP -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cep']}"
+								for="cep" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="cep" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT CEP -->
+					
+					<!-- INÍCIO INPUTTEXT TELEFONE RESIDENCIAL -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.telefoneresidencial']}"
+								for="telefoneresidencial" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="telefoneresidencial" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT TELEFONE RESIDENCIAL -->
+					 
+					<!-- INÍCIO INPUTTEXT TELEFONE CELULAR -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.telefonecelular']}"
+								for="telefonecelular" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="telefonecelular" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT TELEFONE CELULAR -->
+					
+					<!-- INÍCIO INPUTTEXT ENDEREÇO DE REDE SOCIAL -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cidade']}"
+								for="cidade" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="cidade" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT ENDEREÇO DE REDE SOCIAL -->
+					
+					<!-- INÍCIO INPUTTEXT E-MAIL -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.email']}"
+								for="email" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="email" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT E-MAIL -->
+					
+					<!-- INÍCIO SELECTONEMENU CARGO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.cargo']}" for="cargo" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="cargo"
+								value="#{consultaConvidadoController.filtro.cargo}"
+								converter="cargoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.cargosDisponiveis}"
+									var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU CARGO -->
+					
+					<!-- INÍCIO INPUTTEXTAREA ETIQUETA -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.etiqueta']}"
+								for="etiqueta" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputTextarea maxlength="150" id="etiqueta" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXTAREA ETIQUETA -->
+					
+					<!-- INÍCIO SELECTONEMENU ÓRGÃO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.nome.orgao']}" for="orgao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="orgao"
+								value="#{consultaConvidadoController.filtro.orgao}"
+								converter="orgaoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									value="#{null}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.orgaosDisponiveis}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU ÓRGÃO -->
+					
+					<!-- INÍCIO INPUTTEXT SIGLA DO ÓRGÃO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.sigla.orgao']}"
+								for="siglaorgao" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText maxlength="150" id="siglaorgao" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT SIGLA DO ÓRGÃO -->
+					
+					<!-- INÍCIO SELECTONEMENU TIPO DE ÓRGÃO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.tipo.orgao']}" for="tipoorgao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="tipoorgao"
+								value="#{consultaConvidadoController.filtro.orgao}"
+								converter="orgaoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									value="#{null}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.orgaosDisponiveis}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU TIPO DE ÓRGÃO -->
+					
+					<!-- INÍCIO SELECTONEMENU PODER/ÁREA -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.poder.area']}" for="poderarea" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="poderarea"
+								value="#{consultaConvidadoController.filtro.poderArea}"
+								converter="poderAreaConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.poderAreaDisponiveis}"
+									var="poderArea" itemLabel="#{poderArea.nome}"
+									itemValue="#{poderArea}" />
+							</p:selectOneMenu>							
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU PODER/ÁREA -->
+					
+					<!-- INÍCIO SELECTONEMENU ESFERA -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.esfera']}" for="esfera" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera"
+								value="#{consultaConvidadoController.filtro.esfera}"
+								converter="esferaConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.esferasDisponiveis}"
+									var="esfera" itemLabel="#{esfera.nome}" itemValue="#{esfera}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU ESFERA -->
+					
+					<!-- INÍCIO SELECTONEMENU SETOR -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.setor']}" for="setor" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="setor"
+								value="#{consultaConvidadoController.filtro.tratamento}"
+								converter="tratamentoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.tratamentosDisponiveis}"
+									var="tratamento" itemLabel="#{tratamento.nome}"
+									itemValue="#{tratamento}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU SETOR -->
+					
+					<!-- INÍCIO SELECTBOOLEANCHECKBOX PRESENÇA CONFIRMADA -->					
+					<div class="form-group">
+						<div class="col-sm-3 control-label"></div>
+						<div class="col-sm-9">
+							<p:selectBooleanCheckbox
+								value="#{consultaConvidadoController.filtro.presencaConfirmada}" />
+							<h:outputText
+								value="#{msg['label.participante.presenca.confirmada']}"
+								style="margin-right:5px" />
+							<br />
+							<p:selectBooleanCheckbox
+								value="#{consultaConvidadoController.filtro.presencaNaoConfirmada}" />
+							<h:outputText
+								value="#{msg['label.participante.presenca.nao.confirmada']}"
+								style="margin-right:5px" />
+						</div>
+					</div>
+					<!-- FIM SELECTBOOLEANCHECKBOX PRESENÇA CONFIRMADA -->
+						
+				</div>
+			</p:panel>
+			<!-- FIM DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+
+			<!-- INICIO DOS BOTÕES DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false" update="@form"
+							action="#{consultaConvidadoController.comandoPesquisar()}" />
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false"
+							actionListener="#{consultaConvidadoController.comandoLimpar()}"
+							styleClass="btn btn-default" />
+						<p:commandButton id="btnCancelarPesquisa" value="#{msg['botao.cancelar']}"
+							ajax="false" styleClass="btn btn-default" />	
+						<p:commandButton id="btnPesquisaSimples"
+							value="#{msg['botao.pesquisa.simples']}" ajax="false"
+							action="#{tipoEventoController.comandoLimpar()}"
+							styleClass="btn btn-default" />						
+						<p:commandButton id="btnClassificarLista"
+							value="#{msg['botao.classificar.lista']}" ajax="false"
+							action="#{tipoEventoController.comandoLimpar()}"
+							styleClass="btn btn-default" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			<!-- FIM DOS BOTÕES DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+
+			<!-- INICIO DO MÓDULO DE LISTA DE CONVIDADOS -->
+			<p:panel id="panelListaConvidados">
+				<div class="form-group col-sm-12">
+
+					<div class="titulos">
+						<h:outputText value="#{msg['pesquisa.avancada.participante.lista.titulo']}" />
+					</div>
+					<br />
+
+					<p:dataTable id="dtTipoEvento" filteredValue="" 
+						styleClass="datatable table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						var="participante"
+						value="#{consultaConvidadoController.listaResultadoPesquisa}"
+						style="text-align: center;">
+							
+							<p:column
+								headerText="#{msg['registrosduplicados.colunas.label.nomeparticipante']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.titulo']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.cargo']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nome.orgao']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.sigla.orgao']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.situacao']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.tratamento']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nascimento']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nome.conjuge']}">
+								<h:outputText  />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.conjuge.autoridade']}">
+								<h:outputText  />
+							</p:column>							
+
+							<p:column headerText="#{msg['label.acoes']}" width="200">
+								<p:commandButton icon="ui-icon-search" title="Visualizar"
+									action="#{consultaConvidadoController.comandoVisualizar(participante)}"
+									ajax="false">
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-pencil" title="Alterar"
+									action="#{consultaConvidadoController.comandoAlterar(participante)}"
+									ajax="false">
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-trash" title="Excluir"
+									action="#{consultaConvidadoController.comandoExcluir(participante)}"
+									ajax="false">
+								</p:commandButton>
+							</p:column>
+					</p:dataTable>
+					<p:spacer height="20" />
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			<!-- FIM DO MÓDULO DE LISTA DE CONVIDADOS -->
+
+			<!-- INICIO DOS BOTÕES DO MÓDULO DE LISTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="well" style="display: block; text-align: center">
+
+						<p:commandButton id="btnIncluirParticNaoCad"
+							value="#{msg['botao.incluir.participante.nao.cadastrado']}"
+							ajax="false"
+							action="#{consultaConvidadoController.incluirParticipanteNaoCadastrado()}" />
+						<p:commandButton id="btnVerificarRegDuplicados"
+							action="#{consultaConvidadoController.comandoVerificarRegistroDuplicado()}"
+							value="#{msg['botao.verificar.registros.duplicados']}"
+							ajax="false" />
+						<p:commandButton id="btnVincularSetorGrupo"
+							value="#{msg['botao.vincular.setor.grupo']}" ajax="false"
+							action="#{consultaConvidadoController.vincularSetorGrupo()}" />
+
+						<br />
+
+						<p:commandButton id="btnGerarEtiqueta"
+							value="#{msg['botao.gerar.etiqueta']}" ajax="false" />
+						<p:commandButton id="btnConfirmarPresencAntec"
+							value="#{msg['botao.confirmar.presenca.antecipada']}"
+							ajax="false" update="formPrincipal" />
+						<p:commandButton id="btnRepresentadopor"
+							value="#{msg['botao.representado.por']}" ajax="false" />
+
+						<br />
+
+						<p:commandButton id="btnRepresentantede"
+							value="#{msg['botao.representante.de']}" ajax="false" />
+						<p:commandButton id="btnConfiramrPresencFisica"
+							value="#{msg['botao.confirmar.presenca.fisica']}" ajax="false" />
+						<p:commandButton id="btnCancelar"
+							action="#{consultaConvidadoController.comandoCancelar()}"
+							value="#{msg['botao.cancelar']}" ajax="false" />
+
+					</div>
+
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:dialog header="Mensagem" id="modalErro"
+				widgetVar="dialogMensagemErro" visible="true"
+				rendered="#{consultaConvidadoController.modalVisivel}" modal="true">
+				<h:outputText id="mensagemSucessoTxt"
+					value="#{consultaConvidadoController.modalMensagem}" />
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+						onclick="PF('dialogMensagemErro').hide();" immediate="true" />
+				</h:panelGroup>
+			</p:dialog>
+			<!-- FIM DOS BOTÕES DO MÓDULO DE LISTA DE CONVIDADOS -->
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="content">
+
+		<style type="text/css">
+			.ui-panelgrid td {
+				border-width: 0px;
+			}
+		</style>
+
+		<h2>
+			#{msg['manter.poder.area.incluir.titulo']}
+		</h2>
+		<br />
+		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+		
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="nomePoderArea"
+								value="#{msg['manter.poder.area.nome']}"  
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="nomePoderArea" required="true"
+								value="#{inclusaoPoderAreaController.poderArea.nome}"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}"
+								maxlength="200" />
+							<h:message for="nomePoderArea" style="color: red;" />
+						</div>
+					</div>
+				</div>
+				
+				<h:panelGroup style="display:block; text-align:center">					
+					<p:commandButton value="#{msg['botao.salvar']}" styleClass="btn btn-primary"
+						actionListener="#{inclusaoPoderAreaController.comandoSalvar()}"
+						ajax="false" />
+					<p:commandButton value="#{msg['botao.limpar']}"
+						action="#{inclusaoPoderAreaController.comandoLimpar()}" immediate="true"
+						ajax="false" />
+					<p:commandButton value="#{msg['botao.cancelar']}"
+						action="#{inclusaoPoderAreaController.comandoCancelar()}"
+						immediate="true" ajax="false" />
+				</h:panelGroup>				
+			</p:panel>
+
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" visible="true"
+					widgetVar="dialogMensagem"
+					rendered="#{inclusaoPoderAreaController.exibeMensagem}">
+					<h:outputText value="#{inclusaoPoderAreaController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							rendered="#{inclusaoPoderAreaController.sucesso}" ajax="false"
+							action="consultarPoderArea" immediate="true" />
+						<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}"
+							rendered="#{!inclusaoPoderAreaController.sucesso}" ajax="true"
+							onclick="dialogMensagem.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

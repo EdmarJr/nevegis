@@ -1,0 +1,40 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml">
+		
+	 <ui:define name="title">#{msg['grupoParticipante.evento.visualizar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['grupoParticipante.evento.visualizar.titulo']}</h2>
+		</div>
+		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>					
+				
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel for="nome" value="#{msg['grupoParticipante.evento.label.grupoParticipante']}" />
+					</div>
+					<div class="col-sm-9">
+						<h:outputText id="nome"
+							value="#{grupoParticipanteEventoController.grupoParticipante.nome}" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnVoltar" value="#{msg['botao.voltar']}" ajax="false" action="consultar.xhtml" immediate="true"/>
+					</h:panelGroup>
+				</div>
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+	
+</ui:composition>	

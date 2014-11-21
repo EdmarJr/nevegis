@@ -1,0 +1,299 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['importar.participante.mala.direta.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<style type="text/css">
+				.datatable {
+					overflow-x: scroll;
+				}
+		</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['importar.participante.mala.direta.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<!-- INÍCIO INPUTTEXT NOME DO PARTICIPANTE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nome.participante']}"
+								for="nomeparticipante" />						
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="nomeparticipante" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT NOME DO PARTICIPANTE -->
+					
+					<!-- INÍCIO SELECTONEMENU GRUPO PARTICIPANTE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.grupo.participante']}" for="grupoparticipante"/>
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="grupoparticipante">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU GRUPO PARTICIPANTE -->
+
+					<!-- INÍCIO SELECTONEMENU NOME DO ÓRGÃO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.nome.orgao']}" for="nomeorgao"/>
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="nomeorgao">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU NOME DO ÓRGÃO -->
+					
+					<!-- INÍCIO SELECTONEMENU TIPO DE ÓRGÃO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.tipo.orgao']}" for="tipoorgao"/>
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="tipoorgao">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU TIPO DE ÓRGÃO -->
+					
+					<!-- INÍCIO SELECTONEMENU PODER/ÁREA -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.poder.area']}" for="poderarea" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="poderarea">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU PODER/ÁREA -->
+
+					<!-- INÍCIO SELECTONEMENU CARGO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.cargo']}" for="cargo"/>
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="cargo">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU CARGO -->
+					
+					<!-- INÍCIO SELECTONEMENU ESFERA -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.esfera']}" for="esfera"/>
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- FIM SELECTONEMENU ESFERA -->
+					
+					<!-- INÍCIO INPUTTEXT TÍTULO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.titulo']}" for="titulo" />						
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="titulo" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT TÍTULO -->
+					
+					<!-- INÍCIO INPUTTEXT ESTADO -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.estado']}" for="estado" />						
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="estado" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT ESTADO -->
+					
+					<!-- INÍCIO INPUTTEXT CIDADE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cidade']}" for="cidade" />						
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="cidade" />
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT CIDADE -->
+					
+					<!-- INÍCIO INPUTTEXT CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.conjuge']}" for="conjuge" />						
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="conjuge"/>
+						</div>
+					</div>
+					<!-- FIM INPUTTEXT CÔNJUGE -->
+
+					<!-- INÍCIO SELECTBOOLEANCHECKBOX IMPORTAR CÔNJUGE -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label"></div>
+						<div class="col-sm-9">
+							<p:selectBooleanCheckbox />
+							<h:outputText value="#{msg['label.importar.conjuge']}"
+								style="margin-right:5px" />							
+						</div>
+					</div>
+					<!-- FIM SELECTBOOLEANCHECKBOX IMPORTAR CÔNJUGE -->
+
+				</div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="well" style="display: block; text-align: center">
+						<p:commandButton styleClass="btn btn-primary"
+							id="btnHistoricoImportacoes"
+							value="#{msg['botao.historico.importacoes']}"/>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['label.condicoes.titulo']}" />
+					</div>
+					<br />
+					<p:dataTable 
+						styleClass="datatable table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"						
+						style="text-align: center;">
+							<p:column headerText="#{msg['label.coluna.tabela.condicoes.importacao']}">
+								<h:outputText />
+							</p:column>							
+					</p:dataTable>
+					<p:spacer height="20" />
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="well" style="display: block; text-align: center">
+						<p:commandButton styleClass="btn btn-primary"
+							id="btnExcluirCondicao"
+							value="#{msg['botao.excluir.condicao']}"/>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['importacao.participante.excel.lista.titulo']}" />
+					</div>
+					<br />
+					<p:dataTable styleClass="datatable table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"						
+						style="text-align: center;">
+						
+							<p:column
+								headerText="#{msg['registrosduplicados.colunas.label.nomeparticipante']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.titulo']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['registrosduplicados.colunas.label.cargo']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nome.conjuge']}">
+								<h:outputText />
+							</p:column>
+							
+								<p:column
+								headerText="#{msg['label.coluna.tabela.sexo']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.situacao']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.tratamento']}">
+								<h:outputText />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nascimento']}">
+								<h:outputText />
+							</p:column>
+							
+					</p:dataTable>
+					<p:spacer height="20" />
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="well" style="display: block; text-align: center">
+						<p:commandButton id="btnImportar"
+							value="#{msg['botao.importar']}"
+							ajax="false"/>
+						<p:commandButton id="btnCancelar"
+							value="#{msg['botao.cancelar']}"
+							ajax="false" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:dialog header="Mensagem" id="modalErro"
+				widgetVar="dialogMensagemErro" visible="true"
+				rendered="#{consultaConvidadoController.modalVisivel}" modal="true">
+				<h:outputText id="mensagemSucessoTxt"
+					value="#{consultaConvidadoController.modalMensagem}" />
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+						onclick="PF('dialogMensagemErro').hide();" immediate="true" />
+				</h:panelGroup>
+			</p:dialog>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,350 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sig="http://br.jus.stj.commons.components"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+
+		<style type="text/css">
+button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled.ui-fileupload-cancel
+	{
+	display: none;
+}
+
+div.ui-messages-error.ui-corner-all {
+	display: none;
+}
+
+ul.messagesErros {
+	color: red;
+	display: initial;
+}
+
+td.ui-fileupload-preview {
+	display: none;
+}
+
+legend.ui-fieldset-legend.ui-corner-all.ui-state-default {
+	font-size: 16px;
+}
+
+button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-fileupload-cancel
+	{
+	display: none;
+}
+
+button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled.ui-fileupload-cancel.ui-state-hover
+	{
+	display: none;
+}
+
+formPrincipal:remover {
+	visibility: hidden;
+}
+
+.ui-panelgrid td {
+	border-width: 0px;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['label.dados.basicos.participante.titulo']}</h2>
+		</div>
+		<div class="clearfix"></div>
+		<h:form id="formPrincipal" styleClass="form-horizontal"
+			enctype="multipart/form-data">
+			<p:panel id="panelPrincipal">
+				<p:fieldset
+					legend="#{msg['label.dados.basicos.participante.subtitulo']}">
+					<div style="display: flex;">
+						<div>
+							<p:panelGrid columns="2">
+								<p:outputLabel
+									value="#{msg['manter.lista.convidado.incluir.nomeparticipante']}"
+									for="nomeParticipanteTxt" />
+								<p:inputText id="nomeParticipanteTxt" required="true"
+									maxlength="150"
+									requiredMessage="#{msg['msg.campo.obrigatorio']}"
+									value="#{inclusaoParticipanteController.participanteEvento.nome}" />
+								
+								<p:outputLabel />
+								<h:message for="nomeParticipanteTxt" style="color: red;" />
+								
+								<p:outputLabel
+									value="#{msg['manter.lista.convidado.incluir.titulo']}"
+									for="tituloParticipante" />
+								<p:inputText id="tituloParticipante" maxlength="150"
+									value="#{inclusaoParticipanteController.participanteEvento.titulo}" />
+																
+								<p:outputLabel
+									value="#{msg['manter.lista.convidado.incluir.situacao']}"
+									for="situacaoParticipante" />
+								<p:selectOneRadio id="situacaoParticipante"
+									value="#{inclusaoParticipanteController.participanteEvento.situacao}">
+									<f:selectItem
+										itemLabel="#{msg['manter.lista.convidado.incluir.situacao.ativo']}"
+										itemValue="S" />
+									<f:selectItem
+										itemLabel="#{msg['manter.lista.convidado.incluir.situacao.aposentado']}"
+										itemValue="N" />
+								</p:selectOneRadio>
+								
+							</p:panelGrid>
+							<br />
+							<p:commandButton style="float:right;" ajax="false" styleClass="btn btn-primary"
+								value="#{msg['manter.lista.convidado.incluir.vincularcargoorgao']}"
+								action="#{inclusaoParticipanteController.comandoVincularCargoOrgao()}"
+								update="@form">
+
+							</p:commandButton>
+						</div>
+						<div style="margin-left: 5%;">
+						<p:messages showDetail="true" />							
+						<sig:inputUploadImagePreview id="foto" enabled="true" styleClassButton="btn btn-primary"
+							labelButton="#{msg['manter.lista.convidado.incluir.foto']}"
+							imageSize="1340000"
+							messageValidatorSize="#{msg['msg.msg017.tamanhomaximoupload']}"
+							value="#{inclusaoParticipanteController.enderecoFoto}"
+							fileFormat="jpeg,jpg,png"
+							messageValidatorFormat="#{msg['msg.msg031.formatofotoinvalido']}"/>
+						</div>
+					</div>
+					
+					<div class="form-group col-sm-12">
+						<div class="titulos">
+							<h:outputText value="#{msg['manter.lista.convidado.incluir.datatable.titulo']}" />
+						</div>
+					
+					<br />									
+					<p:dataTable emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						value="#{inclusaoParticipanteController.obterVinculosCargoOrgao()}"
+						var="orgaoCargo">
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.cargo']}">
+							<h:outputText value="#{orgaoCargo.cargo.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.nomeorgao']}">
+							<h:outputText value="#{orgaoCargo.orgao.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.tipoorgao']}">
+							<h:outputText value="#{orgaoCargo.orgao.tipoOrgao.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.siglaorgao']}">
+							<h:outputText value="#{orgaoCargo.orgao.sigla}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.poderarea']}">
+							<h:outputText value="#{orgaoCargo.orgao.poderArea.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.esfera']}">
+							<h:outputText value="#{orgaoCargo.orgao.esfera.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.lista.convidado.incluir.datatable.acoes']}">
+							<p:commandButton icon="ui-icon-search"
+								title="#{msg['title.visualizar']}"
+								action="#{inclusaoParticipanteController.comandoVisualizarCargoOrgao(orgaoCargo)}"
+								ajax="false">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-pencil"
+								title="#{msg['title.alterar']}"
+								action="#{inclusaoParticipanteController.comandoAlterarCargoOrgao(orgaoCargo)}"
+								ajax="false">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-trash"
+								title="#{msg['title.excluir']}"
+								action="#{inclusaoParticipanteController.comandoExcluirCargoOrgao(orgaoCargo)}"
+								ajax="false">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</div>	
+					
+				</p:fieldset>
+				<p:fieldset style="margin-top:3%;"
+					legend="#{msg['manter.lista.convidado.incluir.subtitulo.dadospessoaisparticipante']}">
+
+					<p:panelGrid id="panelGrid1" columns="2" style="width : 100%;">
+					
+						<p:outputLabel value="#{msg['manter.lista.convidado.incluir.sexo']}"
+							for="sexo" />
+						<p:selectOneRadio id="sexo" required="true" 
+								requiredMessage="#{msg['msg.campo.obrigatorio']}"
+								value="#{inclusaoParticipanteController.participanteEvento.sexo}">
+								<f:selectItem
+									itemLabel="#{msg['manter.lista.convidado.incluir.sexo.feminino']}"
+									itemValue="F" />
+								<f:selectItem
+									itemLabel="#{msg['manter.lista.convidado.incluir.sexo.masculino']}"
+									itemValue="M" />
+						</p:selectOneRadio>
+						
+						<p:outputLabel />
+						<h:message for="sexo" style="color: red;" />
+						
+						
+						<p:outputLabel value="#{msg['manter.lista.convidado.incluir.tratamento']}"
+							for="listaTratamentos" />
+						<p:selectOneMenu id="listaTratamentos"
+							value="#{inclusaoParticipanteController.participanteEvento.tratamento}"
+							converter="tratamentoConverter">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="#{msg['combo.selecione']}" itemValue="#{null}"
+								itemDisabled="true" />
+							<f:selectItems
+								value="#{inclusaoParticipanteController.obterTratamentosDisponiveis()}"
+								var="tratamento" itemLabel="#{tratamento.nome}"
+								itemValue="#{tratamento}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel	value="#{msg['manter.lista.convidado.incluir.nascimento']}"
+							for="dataNascimento" />
+						<p:calendar id="dataNascimento"
+							validator="dataNascimentoValidator" converter="dateConverter"
+							value="#{inclusaoParticipanteController.participanteEvento.dataNascimento}"
+							pattern="dd/MM/yyyy" requiredMessage="#{msg.msg016.anonascimentoinvalido}" />
+							
+						<h:outputLabel />	
+						<h:message for="dataNascimento" style="color: red;" />
+						
+						<p:outputLabel value="#{msg['manter.lista.convidado.incluir.nomeconjuge']}"
+							for="nomeConjuge" />
+						<p:inputText id="nomeConjuge" maxlength="100"
+							value="#{inclusaoParticipanteController.participanteEvento.nomeConjuge}" />
+						
+						<p:outputLabel value="#{msg['manter.lista.convidado.incluir.conjugeautoridade']}"
+							for="conjugeAutoridade" />
+						<p:selectOneRadio id="conjugeAutoridade"
+							value="#{inclusaoParticipanteController.participanteEvento.conjugeAutoridade}">
+							<f:selectItem itemLabel="#{msg['label.sim']}" itemValue="S" />
+							<f:selectItem itemLabel="#{msg['label.nao']}" itemValue="N" />
+							<f:ajax event="change"
+								listener="#{inclusaoParticipanteController.definirRenderizacaoOpcoesConjuge(inclusaoParticipanteController.participanteEvento.conjugeAutoridade)}"
+								render="panelGrid2" />
+						</p:selectOneRadio>
+						
+					</p:panelGrid>
+					<p:panelGrid id="panelGrid2" columns="2" style="width : 100%;">
+						<p:outputLabel id="labelTituloConjuge"
+							value="#{msg['manter.lista.convidado.incluir.tituloconjuge']}"
+							for="tituloConjuge"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+						<p:inputText id="tituloConjuge" maxlength="100"
+							value="#{inclusaoParticipanteController.participanteEvento.tituloConjuge}"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+						<p:outputLabel id="labelCargoConjuge"
+							value="#{msg['manter.lista.convidado.incluir.cargoconjuge']}"
+							for="cargoConjuge"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+						<p:inputText id="cargoConjuge" maxlength="150"
+							value="#{inclusaoParticipanteController.participanteEvento.nomeCargoConjuge}"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+						<p:outputLabel id="labelOrgaoConjuge"
+							value="#{msg['manter.lista.convidado.incluir.orgaoconjuge']}"
+							for="orgaoConjuge"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+						<p:inputText id="orgaoConjuge" maxlength="150"
+							value="#{inclusaoParticipanteController.participanteEvento.nomeOrgaoConjuge}"
+							rendered="#{inclusaoParticipanteController.renderizarOpcoesConjuge}" />
+					</p:panelGrid>
+					<p:panelGrid id="panelGrid3" columns="2" style="width : 100%;">
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.endereco']}"
+							for="endereco" />
+						<p:inputText id="endereco" maxlength="200"
+							value="#{inclusaoParticipanteController.participanteEvento.endereco}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.complemento']}"
+							for="complemento" />
+						<p:inputText id="complemento" maxlength="200"
+							value="#{inclusaoParticipanteController.participanteEvento.complementoEndereco}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.bairro']}"
+							for="bairro" />
+						<p:inputText id="bairro" maxlength="100"
+							value="#{inclusaoParticipanteController.participanteEvento.bairro}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.cidade']}"
+							for="cidade" />
+						<p:inputText id="cidade" maxlength="200"
+							value="#{inclusaoParticipanteController.participanteEvento.cidade}" />
+						<p:outputLabel value="#{msg['manter.lista.convidado.incluir.uf']}"
+							for="uf" />
+						<p:inputText id="uf" maxlength="2"
+							value="#{inclusaoParticipanteController.participanteEvento.uf}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.cep']}" for="cep" />
+						<p:inputMask mask="99.999-999" id="cep"
+							value="#{inclusaoParticipanteController.participanteEvento.cep}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.telefoneresidencial']}"
+							for="telefoneResidencial" />
+						<p:inputMask mask="(99)9999-9999" id="telefoneResidencial"
+							value="#{inclusaoParticipanteController.participanteEvento.telefoneResidencial}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.telefonecelular']}"
+							for="telefonecelular" />
+						<p:inputMask mask="(99)9999-99999" id="telefonecelular"
+							value="#{inclusaoParticipanteController.participanteEvento.telefoneCelular}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.enderecoredesocial']}"
+							for="enderecoredesocial" />
+						<p:inputText id="enderecoredesocial" maxlength="200"
+							value="#{inclusaoParticipanteController.participanteEvento.redeSocial}" />
+						<p:outputLabel
+							value="#{msg['manter.lista.convidado.incluir.email']}"
+							for="email" />
+						<p:inputText id="email" validator="emailValidator" maxlength="200"
+							value="#{inclusaoParticipanteController.participanteEvento.email}" 
+							requiredMessage="#{msg.msg030.emailinvalido}"/>
+							
+						<h:outputLabel />	
+						<h:message for="email" style="color: red;" />	
+							
+						
+					</p:panelGrid>
+					<br />
+					<p:outputLabel
+						value="#{msg['manter.lista.convidado.incluir.observacao']}"
+						for="observacao" />
+					<p:inputTextarea id="observacao" maxlength="450"
+						value="#{inclusaoParticipanteController.participanteEvento.observacao}" />
+
+				</p:fieldset>
+
+				<p:commandButton value="#{msg['botao.salvar']}" styleClass="btn btn-primary" ajax="false"
+					actionListener="#{inclusaoParticipanteController.comandoSalvar(inclusaoParticipanteController.participanteEvento)}">
+
+				</p:commandButton>
+				<p:commandButton value="#{msg['botao.limpar']}" immediate="true"
+					ajax="false"
+					action="#{inclusaoParticipanteController.comandoLimpar()}">
+				</p:commandButton>
+				<p:commandButton value="#{msg['botao.cancelar']}"
+					action="#{inclusaoParticipanteController.comandoCancelar()}"
+					immediate="true" ajax="false" />
+			</p:panel>
+			<p:dialog header="Mensagem" id="modalSucesso"
+				widgetVar="dialogMensagemSucesso" visible="true"
+				rendered="#{inclusaoParticipanteController.modalSucessoVisivel}"
+				modal="true">
+				<h:outputText id="mensagemSucessoTxt"
+					value="#{msg['msg.msg001.inclusaosucesso']}" />
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+						ajax="false"
+						action="#{inclusaoParticipanteController.depoisDeSalvar()}"
+						immediate="true" />
+				</h:panelGroup>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

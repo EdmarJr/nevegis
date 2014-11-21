@@ -1,0 +1,310 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		
+		<style type="text/css">
+			ul.messagesErros {
+				color: red;
+				display: initial;
+			}
+			
+			.ui-panelgrid td {
+				border-width: 0;
+			}
+		</style>
+
+		<h2>
+			#{msg['manter.orgao.cargo.label.alterar.titulo']}
+		</h2>
+		<br />
+		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+				
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel	value="#{msg['manter.orgao.cargo.label.cargo']}"
+								for="cargo" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-8">
+						
+							<p:selectOneMenu id="cargo" converter="cargoConverter"
+								required="true"
+								requiredMessage="#{msg['msg.msg005.camposobrigatorios']}"
+								value="#{alteracaoCargoOrgaoController.orgaoCargoTemp.cargo}">
+								<f:selectItem noSelectionOption="true"
+									itemLabel="#{msg['combo.selecione']}" itemValue="#{null}"
+									itemDisabled="true" />
+								<f:selectItems
+									value="#{alteracaoCargoOrgaoController.obterCargosDisponiveis()}"
+									var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+							</p:selectOneMenu>
+							<h:message for="cargo" style="color: red;" />
+						</div>
+						<div class="col-sm-1">
+							<p:commandButton icon="ui-icon-pencil"
+									title="#{msg['title.alterar']}" immediate="true"
+									action="#{alteracaoCargoOrgaoController.comandoManterCargos()}"
+									ajax="false" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="orgao"
+								value="#{msg['manter.orgao.cargo.label.nome.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-8">
+							<p:selectOneMenu id="orgao" converter="orgaoConverter"
+								required="true"
+								requiredMessage="#{msg['msg.msg005.camposobrigatorios']}"
+								value="#{alteracaoCargoOrgaoController.orgaoCargoTemp.orgao}">
+								<f:selectItem noSelectionOption="true"
+									itemLabel="#{msg['combo.selecione']}" itemValue="#{null}"
+									itemDisabled="true" />
+								<f:selectItems
+									value="#{alteracaoCargoOrgaoController.obterOrgaosDisponiveis()}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+							</p:selectOneMenu>
+							<h:message for="orgao" style="color: red;" />
+						</div>
+						<div class="col-sm-1">
+							<p:commandButton icon="ui-icon-pencil"
+									title="#{msg['title.alterar']}" immediate="true"
+									action="#{alteracaoCargoOrgaoController.comandoManterOrgaos()}"
+									ajax="false" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="siglaOrgao"
+								value="#{msg['manter.orgao.cargo.label.sigla.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText	readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+								id="siglaOrgao"
+								value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.sigla}"/>
+						</div>
+					</div>	
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel	value="#{msg['manter.orgao.cargo.label.tipo.orgao']}"
+								for="tipoOrgao"  
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+								id="tipoOrgao"
+								value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.tipoOrgao.nome}"
+								maxlength="250"/>
+						</div>
+					</div>	
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel	value="#{msg['manter.orgao.cargo.label.poder.area']}"
+								for="poderArea" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+								id="poderArea"
+								value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.poderArea.nome}" 
+								maxlength="250"/>
+						</div>
+					</div>	
+					
+					<div class="form-group">
+							<div class="col-sm-3 control-label">	
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.esfera']}"
+									for="esfera" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="esfera"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.esfera.nome}" />
+							</div>
+						</div>		
+								
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel
+									value="#{msg['manter.orgao.cargo.label.endereco.orgao']}"
+									for="endereco" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="endereco"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.endereco}" />
+							</div>
+						</div>			
+								
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel
+									value="#{msg['manter.orgao.cargo.label.complemento']}"
+									for="complemento" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="complemento"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.complementoEndereco}" />
+							</div>
+						</div>		
+						
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.bairro']}"
+									for="bairro" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="bairro"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.bairro}" />
+							</div>
+						</div>		
+								
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.uf']}"
+									for="uf" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="uf"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.uf}" />
+							</div>
+						</div>	
+						
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.cidade']}"
+									for="cidade" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="cidade"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cidade}" />
+							</div>
+						</div>		
+									
+						<div class="form-group">
+							<div class="col-sm-3 control-label">				
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.cep']}"
+									for="cep" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputMask
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="cep" mask="99.999-999"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cep}" />
+							</div>
+						</div>		
+								
+						<div class="form-group">
+							<div class="col-sm-3 control-label">			
+								<p:outputLabel	value="#{msg['manter.orgao.cargo.label.telefone.comercial']}"
+									for="telefoneComercial" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputMask
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="telefoneComercial" mask="(99)9999-9999"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.telefoneComercial}" />
+							</div>
+						</div>			
+								
+						<div class="form-group">
+							<div class="col-sm-3 control-label">				
+								<p:outputLabel
+									value="#{msg['manter.orgao.cargo.label.celular.funcional']}"
+									for="celularFuncional" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputMask
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="celularFuncional" mask="(99)9999-99999"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.fax}" />						
+							</div>
+						</div>		
+							
+						<div class="form-group">
+							<div class="col-sm-3 control-label">		
+								<p:outputLabel value="#{msg['manter.orgao.cargo.label.email']}"
+									for="email" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="email"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.email}" />
+							</div>
+						</div>		
+							
+						<div class="form-group">
+							<div class="col-sm-3 control-label">		
+								<p:outputLabel
+									value="#{msg['manter.orgao.cargo.label.pagina.internet']}"
+									for="paginaInternet" style="float:right;" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText
+									readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+									id="paginaInternet"
+									value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.paginaInternet}" />
+							</div>
+						</div>					
+			
+				</div>
+			</p:panel>
+			
+			<h:panelGroup style="display:block; text-align:center">
+				<p:commandButton value="#{msg['botao.salvar']}"
+								styleClass="btn btn-primary" ajax="true"
+								update="formPrincipal dialogMensagem"
+								actionListener="#{alteracaoCargoOrgaoController.antesDeConcluir()}" />
+				<p:commandButton value="#{msg['botao.limpar']}" ajax="false"
+					action="#{alteracaoCargoOrgaoController.comandoLimpar()}"
+					immediate="true">
+				</p:commandButton>
+				<p:commandButton value="#{msg['botao.cancelar']}"
+					action="#{alteracaoCargoOrgaoController.cancelarAlteracao()}"
+					immediate="true" ajax="false" />
+			</h:panelGroup>
+			
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" visible="true"
+					widgetVar="dialogMensagem"
+					rendered="#{alteracaoCargoOrgaoController.exibeMensagem}">
+					<h:outputText
+						value="#{alteracaoCargoOrgaoController.mensagemSucesso}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							ajax="false" action="#{alteracaoCargoOrgaoController.concluir()}"
+							immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sig="http://br.jus.stj.commons.components"
+	template="../template/commonLayout.xhtml">
+
+	<ui:define name="content">
+
+		<h2>#{msg['importacao.participante.excel.titulo']}</h2>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal"
+			enctype="multipart/form-data">
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="form-inline">
+
+
+
+
+					<h:messages id="messages" styleClass="messagesErros" />
+						<sig:inputFile labelButton="#{msg['importacao.participante.excel.lista.botao.importar']}" value="#{importarListaParticipanteExcelController.enderecoArquivo}" maxSize="10000000" messageErrorSize="#{msg['msg.MSG034.tamanhoMaximo']}" typeFile="xls,xlsx" messageErrorTypeFile="#{msg['msg.MSG036.formatoInvalido']}" >
+							<p:ajax event="change" listener="#{importarListaParticipanteExcelController.handleFileUpload()}" update="dtParticipamtes dialogImportacao dialogMensagem" />
+						</sig:inputFile>
+<BR />
+					</div>
+				</div>
+
+				<div style="clear: both"></div>
+
+
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<p:dataTable id="dtParticipamtes"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						var="participante"
+						value="#{importarListaParticipanteExcelController.listaImportadaParticipantes}"
+						style="text-align: center; font-weight: bold;" styleClass="table-responsive">
+
+						<p:column headerText="Tratamento">
+							<h:outputText value="#{participante.tratamento}" />
+						</p:column>
+						<p:column headerText="Titulo">
+							<h:outputText value="#{participante.titulo}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{participante.nome}" />
+						</p:column>
+						<p:column headerText="Cargo">
+							<h:outputText value="#{participante.cargo}" />
+						</p:column>
+						<p:column headerText="Orgão">
+							<h:outputText value="#{participante.orgao}" />
+						</p:column>
+						<p:column headerText="Endereço">
+							<h:outputText value="#{participante.endereco}" />
+						</p:column>
+						<p:column headerText="Estado">
+							<h:outputText value="#{participante.estado}" />
+						</p:column> 
+						<p:column headerText="Cidade">
+							<h:outputText value="#{participante.cidade}" />
+						</p:column>
+						<p:column headerText="CEP">
+							<h:outputText value="#{participante.cep}" />
+						</p:column>
+					</p:dataTable>
+
+					<p:spacer height="20" />
+
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+
+			<p:panel>
+				<!-- <div class="form-group">
+					<div class="col-sm-5 control-label">
+						<h:outputText
+							value="#{msg['importacao.participante.excel.lista.cor']}"
+							style="margin-right:5px" />
+					</div>
+					<div class="col-sm-6">
+						<p:selectOneMenu id="idSetor"
+							value="#{importarListaParticipanteExcelController.setor}"
+							converter="setorConverter">
+							<f:selectItem itemLabel="#{msg['combo.selecione']}"
+								noSelectionOption="true" itemValue="#{null}" />
+							<f:selectItems
+								value="#{importarListaParticipanteExcelController.listaSetor}"
+								var="listaSetor" itemLabel="#{listaSetor.nome}"
+								itemValue="#{listaSetor}" />
+						</p:selectOneMenu>
+					</div>
+				</div> -->
+
+				<div class="form-group">
+					<div class="col-sm-5 control-label">
+						<h:outputText
+							value="#{msg['importacao.participante.excel.lista.grupo']}"
+							style="margin-right:5px" />
+					</div>
+					<div class="col-sm-5">
+						<p:selectOneMenu id="idGrupo"
+							value="#{importarListaParticipanteExcelController.grupo}">
+							<f:selectItem itemLabel="#{msg['combo.selecione']}" itemValue="1" />
+							<f:selectItems
+								value="#{importarListaParticipanteExcelController.listaGrupoParticipante}"
+								var="listaGrupo" itemLabel="#{listaGrupo.nome}"
+								itemValue="#{listaGrupo.id}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="col-sm-2">
+						<p:commandButton icon="ui-icon-list" title="Lista de participantes"
+							action="#{importarListaParticipanteExcelController.direcionaManterGrupoParticipante()}"
+							ajax="false" immediate="true" />
+					</div>
+				</div>
+
+				<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['importacao.participante.excel.lista.importar']}"
+							ajax="false" update="formPrincipal"
+							action="#{importarListaParticipanteExcelController.comandoSalvar()}" immediate="true" />
+							
+						<p:commandButton id="btnLimpar" value="#{msg['botao.cancelar']}"
+							ajax="false" action="#{importarListaParticipanteExcelController.comandoCancelar()}"
+							styleClass="btn btn-default" immediate="true" />
+					</div>
+				
+
+
+				<div style="clear: both"></div>
+
+
+			</p:panel>
+
+			<p:outputPanel id="dialogImportacao" layout="block">
+				<p:dialog header="Importação"  widgetVar="dialogImportacao" visible="true" rendered="#{importarListaParticipanteExcelController.mensagemNomeVazio}">
+				<h:outputText value="#{msg['msg.MSG035.colunaNomeVazio']}" />
+					<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnImport" value="#{msg['botao.ok']}" ajax="true" onclick="dialogImportacao.hide()" immediate="true"  />
+					</h:panelGroup>
+				</p:dialog>
+
+			</p:outputPanel>
+
+				<p:outputPanel id="dialogMensagem" layout="block">
+					<p:dialog header="Mensagem"  widgetVar="dialogMensagem" visible="true" rendered="#{importarListaParticipanteExcelController.exibeMensagem}">
+						<h:outputText value="#{importarListaParticipanteExcelController.dialogMensagem}" />
+						<h:panelGroup style="display:block; text-align:center">
+							<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"  action="#{importarListaParticipanteExcelController.direcionaParticipante()}" ajax="false"  immediate="true"  onclick="dialogMensagem.hide()" />
+						</h:panelGroup>
+					</p:dialog>
+					</p:outputPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

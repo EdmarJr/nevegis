@@ -1,0 +1,198 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['ordem.precedencia.consultar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['ordem.precedencia.consultar.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>			
+				<div class="form-group col-sm-12">
+									
+					<!-- Inicio do selectOneMenu Cargo -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.cargo']}" for="cargo" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="cargo"
+								value="#{ordemPrecedenciaController.cargo}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaCargos}"
+									var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Cargo -->					
+					
+					<!-- Inicio do selectOneMenu Órgão -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.orgao']}" for="orgao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="orgao"
+								value="#{ordemPrecedenciaController.orgao}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaOrgaos}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}"/>
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Órgão -->
+											
+					<!-- Inicio do inputText Nível -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nivel']}" for="nivel" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="nivel" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Nível -->
+
+					<!-- Inicio do inputText Sub-Nível -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.sub.nivel']}" for="subnivel" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="subnivel" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Sub-Nível -->
+
+					<!-- Inicio do selectOneMenu Poder/Área -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.poder.area']}" for="poderarea" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="poderarea"
+								value="#{ordemPrecedenciaController.poderArea}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaPoderArea}"
+									var="poderArea" itemLabel="#{poderArea.nome}" itemValue="#{poderArea}"/>
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Poder/Área -->
+					
+					<!-- Inicio do selectOneMenu Esfera -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.esfera']}" for="esfera" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />								
+							</p:selectOneMenu>
+						
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Esfera -->
+					
+				</div>
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false"/>
+
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false" styleClass="btn btn-default" immediate="true" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['ordem.precedencia.lista.titulo']}" />
+					</div>
+					<br />
+					<p:dataTable id="listaordemprecedencia"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						style="text-align: center;" styleClass="table-responsive">
+
+						<p:column headerText="#{msg['label.coluna.tabela.nivel']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column
+							headerText="#{msg['label.coluna.tabela.sub.nivel']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.cargo']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.orgao']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.poder.area']}">
+							<h:outputText  />
+						</p:column>
+						
+						<p:column headerText="#{msg['label.coluna.tabela.esfera']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.acoes']}" width="200">
+							
+							<p:commandButton icon="ui-icon-search" title="#{msg['title.visualizar']}" >
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-pencil" title="#{msg['title.alterar']}">
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-trash" title="#{msg['title.excluir']}">
+							</p:commandButton>
+							
+						</p:column>
+
+					</p:dataTable>
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnIncluir" ajax="false"
+							value="#{msg['botao.incluir']}" action="incluir" styleClass="btn btn-primary" />
+						<p:commandButton id="btnCancelar" disabled="true"
+							value="#{msg['botao.cancelar']}" styleClass="btn btn-default" />
+					</h:panelGroup>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+

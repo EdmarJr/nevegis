@@ -1,0 +1,413 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['evento.alterar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['evento.alterar.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel id="panelPrincipal">
+					<!-- Inicio linha input -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.nome']}" for="evento" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText value="#{eventoController.evento.nome}" maxlength="200"
+								required="true"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}" id="evento" />
+							<h:message for="evento" style="color: red;" />
+						</div>
+					</div>
+
+					<!-- fim linha input -->
+
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.tipo']} " />
+						</div>
+						<div class="col-sm-9">
+							<h:selectOneMenu value="#{eventoController.idTipoEvento}"
+								id="localTipoEvento" styleClass="col-sm-12">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems value="#{eventoController.listaTipoEvento}"
+									var="listaTipoEvento" itemLabel="#{listaTipoEvento.nome}"
+									itemValue="#{listaTipoEvento.id}" />
+							</h:selectOneMenu>
+
+						</div>
+					</div>
+
+
+
+					<!-- <div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.local']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu value="#{eventoController.idLocalEvento}"
+								id="localEvento">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems value="#{eventoController.listaLocal}"
+									var="listaLocal" itemLabel="#{listaLocal.nome}"
+									itemValue="#{listaLocal.id}" />
+							</p:selectOneMenu>
+
+						</div>
+					</div>	 -->				
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.periodoevento']}" />
+						</div>
+						<div class="col-sm-4">
+						
+							<p:calendar maxlength="10" value="#{eventoController.evento.dataInicio}"
+								id="dataInicio" pattern="dd/MM/yyyy" >
+								 <f:validator validatorId="dataValidator" />
+							</p:calendar>
+							<h:message for="dataInicio" style="color:red" />
+								
+								
+								
+						</div>
+						<div class="col-sm-1 control-label">
+							<p:outputLabel value="#{msg['label.ate']}" />
+						</div>
+						<div class="col-sm-4">
+							<p:calendar maxlength="10" value="#{eventoController.evento.dataFim}"
+								id="dataFim" pattern="dd/MM/yyyy" >
+								  <f:validator validatorId="dataValidator" />
+							</p:calendar>
+							<h:message for="dataFim" style="color:red" />
+						</div>
+					</div>
+
+					<!-- Inicio radio -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.status']}"
+								style="margin-right:5px" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="status"
+								value="#{eventoController.status}">
+								<f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- fim radio -->
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.hora']}" />
+						</div>
+						<div class="col-sm-2">
+							<p:calendar maxlength="10" value="#{eventoController.evento.hora}"
+								pattern="HH:mm" timeOnly="true" id="hora">
+								<f:validator validatorId="horaValidator" />
+							</p:calendar>
+							<h:message for="hora" style="color:red" />
+						</div>
+					</div>					
+					
+					<div class="form-group">
+							<div class="col-sm-3 control-label">
+								<p:outputLabel value="#{msg['evento.listar.mestre.cerimonia']}" />
+							</div>
+							<div class="col-sm-9">
+								<h:selectOneMenu value="#{eventoController.mestreCerimoniaId}"
+									id="mestreCerimonia" styleClass="col-sm-12">
+									<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+									<f:selectItems value="#{eventoController.listaMestreCerimonia}"
+										var="listaLocal" itemLabel="#{listaLocal.nome}"
+										itemValue="#{listaLocal.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-3 control-label">
+								<p:outputLabel value="#{msg['evento.listar.responsavel']} " for="usuario" />
+							</div>
+							<div class="col-sm-9">
+								<h:selectOneMenu value="#{eventoController.usuarioId}"
+									id="usuario" styleClass="col-sm-12">
+									<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+									<f:selectItems value="#{eventoController.listaUsuario}"
+										var="listaLocal" itemLabel="#{listaLocal.nome}"
+										itemValue="#{listaLocal.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.traducao.libras']}" />
+						</div>
+						<div class="col-sm-9">
+							<h:selectOneRadio value="#{eventoController.traducaoLibra}">
+								<t:selectItems value="#{eventoController.traducaoEnum}"
+									var="traducao" itemLabel="#{msg[traducao.label]}"
+									itemValue="#{traducao.valor}" />
+							</h:selectOneRadio>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.taquigrafia']}" />
+						</div>
+						<div class="col-sm-9">
+							<h:selectOneRadio value="#{eventoController.taquigrafia}">
+								<t:selectItems value="#{eventoController.taquigrafiaEnum}"
+									var="taquigrafia" itemLabel="#{msg[taquigrafia.label]}"
+									itemValue="#{taquigrafia.valor}" />
+							</h:selectOneRadio>
+						</div>
+					</div>
+					<p:panel>
+						<div class="form-group col-sm-12">
+							<div class="well">
+								<div class="form-group">
+									<div class="col-sm-3 control-label">
+										<p:panel id="panelButton">
+											<p:commandButton styleClass="btn btn-primary"
+												update="addDialogTipoServForn" id="btnAddTipoServForn"
+												process="panelButton"
+												actionListener="#{eventoController.abrirDailogservico()}"
+												value="#{msg['evento.botao.adicionar.tipo.servico.fornecedor']}" >
+										
+											<p:resetInput target="addDialogTipoServForn"></p:resetInput>
+										</p:commandButton>
+										</p:panel>
+									</div>
+								</div>
+							</div>
+						</div>
+					</p:panel>
+					<p:panel id="panelTable">
+					<div class="form-group col-sm-12">
+						<br />
+						<p:dataTable id="tipoServFornrDataTable"
+							value="#{eventoController.listaServicoPrestadoEvento}"
+							var="servico" emptyMessage="Nenhum registro encontrado."
+							style="text-align: center;" styleClass="table-responsive" >
+
+							<p:column headerText="Tipo de Serviço" >
+									<h:outputText value="#{servico.tipoServicoSGVEN.nome}" />
+							</p:column>
+
+							<p:column headerText="Fornecedor" >
+									<h:outputText value="#{servico.fornecedorSGVEN.nome}" />
+							</p:column>
+							<p:column headerText="Ações	">
+								<p:commandButton icon="ui-icon-trash" title="Excluir"  immediate="true"  
+ 									action="#{eventoController.removerServicoAlterar()}" ajax="false">
+								<f:setPropertyActionListener target="#{eventoController.servicoPrestadoEvento}" 
+									value="#{servico}" />
+							</p:commandButton>	
+							</p:column>
+						</p:dataTable>
+					</div>
+				</p:panel>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.custoFinal']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText value="#{eventoController.evento.custoFinal}" maxlength="30" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.observacoes']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputTextarea value="#{eventoController.evento.observacao}" maxlength="500" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.participante']}" />
+						</div>
+						<div class="col-sm-4">
+							<p:commandButton styleClass="btn btn-primary" id="btnImportarModal"
+								value="#{msg['botao.importar']}"  ajax="true" 
+								immediate="true"
+ 								update="formPrincipal"
+								action="#{eventoController.carregaModalImportacao()}" />
+						</div>
+					</div>
+
+				<div class="form-group col-sm-12">
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary"
+							id="btnParticipanteNaoCadastrado"
+							value="#{msg['evento.botao.participante.nao.cadastrado']}"
+							ajax="true" update="formPrincipal"  process="panelPrincipal"
+							action="#{eventoController.ponteParticipanteNaoCadastradoAlterar()}">
+							</p:commandButton>
+						<p:commandButton styleClass="btn btn-primary" id="btnDuplicado"
+							value="#{msg['evento.botao.verificar.duplicado']}" disabled="true"
+							ajax="true" update="formPrincipal"  process="panelPrincipal"
+							action="#{eventoController.ponteRegistroDuplicadoAlterar()}" />
+
+
+					</div>
+					<h:inputHidden value="#{eventoController.evento.id}" />
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.salvar']}" ajax="true"
+							update="dialogMensagemMesmoNome,dialogMensagem,panelPrincipal" process="panelPrincipal"
+							actionListener="#{eventoController.verificaAlteracao()}" />
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}" immediate="true"
+							ajax="true" action="#{eventoController.comandoLimpar()}" update="formPrincipal"
+							styleClass="btn btn-default" >
+							<p:resetInput target="formPrincipal"></p:resetInput>
+							</p:commandButton>
+						<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}"
+							ajax="false" action="consultarEvento.xhtml"
+							styleClass="btn btn-default" immediate="true" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+	
+			<p:outputPanel id="dialogMensagem" layout="block">
+					<p:dialog header="Mensagem"  widgetVar="dialogMensagem" >
+						<h:outputText value="#{eventoController.dialogMensagem}" />
+						<h:panelGroup style="display:block; text-align:center">
+							<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}" rendered="#{eventoController.sucesso}" action="#{eventoController.direciona()}" ajax="false"  immediate="true"  />
+							<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}" rendered="#{!eventoController.sucesso}" ajax="true" onclick="dialogMensagem.hide()" />
+						</h:panelGroup>
+					</p:dialog>
+					</p:outputPanel>
+					
+				<p:outputPanel id="dialogMensagemMesmoNome" layout="block">
+					<p:dialog header="Mensagem"  widgetVar="dialogMensagemMesmoNome" >
+						<h:outputText value="#{eventoController.dialogMensagem}" />
+						<h:panelGroup style="display:block; text-align:center">
+							<p:commandButton id="btnOkMenosNome" value="#{msg['title.alterar']}"  action="#{eventoController.comandoAlterarSalvar()}" immediate="true"  update="dialogMensagem" />
+							<p:commandButton id="btnCancelarMenosNome" value="#{msg['botao.cancelar']}" ajax="false" immediate="true" action="#{eventoController.cancelar()}"  onclick="dialogMensagemMesmoNome.hide()"  />
+						</h:panelGroup>
+					</p:dialog>
+				</p:outputPanel>
+
+
+			<p:outputPanel id="dialogMensagemErro" layout="block">
+				<p:dialog header="Mensagem" 
+					widgetVar="dialogMensagemErro"
+					rendered="#{eventoController.exibeMensagemErro}">
+					<h:outputText value="#{eventoController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkErro3" value="#{msg['botao.ok']}"
+							ajax="true" onclick="dialogMensagemConvidado.hide()"
+							immediate="true"
+							action="#{eventoController.desabiltaMensagemErro()}" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+			
+			<p:outputPanel id="dialogImportacao" layout="block">
+				<p:dialog header="Importação"  widgetVar="dialogImportacao"  >
+					<h:panelGroup style="display:block; text-align:center">	
+					<p:panel id="panelImportacao">					
+						<p:commandButton styleClass="btn btn-primary" id="btnImportarMala" value="#{msg['botao.importar.maladireta']}"  ajax="true" onclick="dialogImportacao.hide()" immediate="true" />
+						<p:commandButton styleClass="btn btn-primary" id="btnImportarSIGEVEN" value="#{msg['botao.importar.sigeven']}"  ajax="true" action="../manterListaConvidado/incluirParticipante.jsf" onclick="dialogImportacao.hide()" immediate="true" />
+						<p:commandButton styleClass="btn btn-primary" id="btnImportarExcel" value="#{msg['botao.importar.excel']}" ajax="true" update="formPrincipal" action="#{eventoController.ponteImportacaoAlterar()}"   process="panelImportacao,panelPrincipal"/>
+						<br />
+						<p:commandButton id="btnImport" value="#{msg['botao.voltar']}" ajax="true" onclick="dialogImportacao.hide()" immediate="true"  />
+					</p:panel>
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+
+
+			<p:panel id="panelDialig">
+				<p:dialog id="addDialogTipoServForn"
+					widgetVar="addDialogTipoServFornVar" resizable="false"
+					width="500px" height="250px">
+					<h:panelGrid id="panelDialog" columns="1" width="100%"
+						style="text-align: center;">
+
+						<p:column>
+							<div class="form-group">
+								<div class="col-sm-3 control-label">
+									<p:outputLabel for="tipoServico"
+										value="#{msg['evento.listar.tipo.servico']}" />
+								</div>
+								<div class="col-sm-9">
+									<h:selectOneMenu value="#{eventoController.tipoServicoId}"
+										id="tipoServico" styleClass="col-sm-9">
+										<f:selectItem itemLabel="#{msg['combo.selecione']}" itemValue="#{null}"/>
+										<f:selectItems value="#{eventoController.listaTipoServico}"
+											var="listaLocal" itemLabel="#{listaLocal.nome}"
+											itemValue="#{listaLocal.id}" />
+										<f:ajax listener="#{eventoController.addTipoServico()}"
+											event="change" />
+										<f:validator validatorId="selectOneMenuValidator" />
+									</h:selectOneMenu>
+									<h:message for="tipoServico" />
+
+								</div>
+							</div>
+						</p:column>
+
+						<p:column>
+							<div class="form-group">
+								<div class="col-sm-3 control-label">
+									<p:outputLabel for="fornecedor"
+										value="#{msg['evento.listar.fornecedor']}" />
+								</div>
+								<div class="col-sm-9">
+									<h:selectOneMenu value="#{eventoController.fornecedorId}"
+										id="fornecedor" styleClass="col-sm-9">
+										<f:selectItem itemLabel="#{msg['combo.selecione']}" itemValue="#{null}"/>
+										<f:selectItems value="#{eventoController.listaFornecedor}"
+											var="listaLocal" itemLabel="#{listaLocal.nome}"
+											itemValue="#{listaLocal.id}" />
+										<f:ajax listener="#{eventoController.addFornecedor()}"
+											event="change" />
+										<f:validator validatorId="selectOneMenuValidator" />
+									</h:selectOneMenu>
+									<h:message for="fornecedor" />
+
+								</div>
+							</div>
+						</p:column>
+
+						<p:column>
+							<br />
+							<br />
+							<p:commandButton value="#{msg['botao.incluir']}"
+								icon="ui-icon-check" styleClass="btn btn-primary" ajax="true"
+								process="panelDialig"
+								update=":formPrincipal:tipoServFornrDataTable,panelDialog"
+								actionListener="#{eventoController.adicionarServicoPrestado()}">
+
+							</p:commandButton>
+							<p:commandButton value="#{msg['botao.cancelar']}" type="button"
+								styleClass="btn btn-primary" icon="ui-icon-close" 
+								onclick="PF('addDialogTipoServFornVar').hide();" />
+						</p:column>
+					</h:panelGrid>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

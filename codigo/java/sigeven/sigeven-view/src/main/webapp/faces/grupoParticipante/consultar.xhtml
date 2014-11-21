@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<style type="text/css">
+		.ui-panelgrid td {
+			border-width: 0;
+		}
+	</style>
+	
+	<ui:define name="content">
+			
+			<div class="form-group col-sm-12">
+				<h2>#{msg['grupoParticipante.evento.consultar.titulo']}</h2>
+			</div>
+		
+			<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+				<p:panel>
+					<div class="form-group col-sm-12">
+	
+						<div class="form-group">
+							<div class="col-sm-3 control-label">
+								<p:outputLabel for="grupoParticipante"
+									value="#{msg['grupoParticipante.evento.label.grupoParticipante']}" />
+							</div>
+							<div class="col-sm-9">
+								<p:inputText id="grupoParticipante" size="30"
+									value="#{grupoParticipanteEventoController.grupoParticipante.nome}"
+									maxlength="100" />
+							</div>
+						</div>
+	
+						<div class="well">
+							<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+								value="#{msg['botao.pesquisar']}" ajax="false"
+								update="formPrincipal"
+								action="#{grupoParticipanteEventoController.comandoPesquisar()}" />
+							<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+								ajax="false" action="#{grupoParticipanteEventoController.comandoLimpar()}"
+								styleClass="btn btn-default" />
+						</div>
+						
+					</div>
+					<div style="clear: both"></div>
+				</p:panel>
+						
+				<p:panel>
+					<div class="form-group col-sm-12">
+						<div class="titulos">
+							<h:outputText value="#{msg['grupoParticipante.evento.lista.label.grupoParticipante']}" />
+						</div>
+						<br />	
+						
+						<p:dataTable var="te" value="#{grupoParticipanteEventoController.listaGrupoParticipante}"
+							emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+							style="text-align: center;" styleClass="table-responsive">
+								
+							<p:column
+								headerText="#{msg['grupoParticipante.evento.lista.label.grupoParticipante']}">
+								<h:outputText value="#{te.nome}" />
+							</p:column>
+	
+							<p:column headerText="#{msg['label.acoes']}"
+								width="200">
+								<p:commandButton icon="ui-icon-search" title="Visualizar"
+									action="#{grupoParticipanteEventoController.comandoVisualizar()}"
+									ajax="false">
+									<f:setPropertyActionListener
+										target="#{grupoParticipanteEventoController.grupoParticipante}" value="#{te}" />
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-pencil" title="Alterar"
+									action="#{grupoParticipanteEventoController.comandoAlterar()}" ajax="false">
+									<f:setPropertyActionListener
+										target="#{grupoParticipanteEventoController.grupoParticipante}" value="#{te}" />
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-trash" title="Excluir"
+									action="#{grupoParticipanteEventoController.comandoExcluir()}" ajax="false">
+									<f:setPropertyActionListener
+										target="#{grupoParticipanteEventoController.grupoParticipante}" value="#{te}" />
+								</p:commandButton>
+							</p:column>	
+								
+						</p:dataTable>							
+						
+						<p:spacer height="20" />
+						<h:panelGroup style="display:block; text-align:center">
+							<p:commandButton id="btnIncluir" styleClass="btn btn-primary" value="#{msg['botao.incluir']}"
+								action="#{grupoParticipanteEventoController.direcionaInclusao()}" ajax="false" />
+							<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}" 
+								styleClass="btn btn-default" 
+								action="#{grupoParticipanteEventoController.comandoCancelar()}"
+								immediate="true" ajax="false" />								
+						</h:panelGroup>
+					</div>
+					<div style="clear: both"></div>
+				</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

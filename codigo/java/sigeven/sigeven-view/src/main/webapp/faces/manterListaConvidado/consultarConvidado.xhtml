@@ -1,0 +1,349 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['manter.lista.convidado.consultar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<style type="text/css">
+.datatable {
+	overflow-x: scroll;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['manter.lista.convidado.consultar.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+
+			<!-- INICIO DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nome.participante']}"
+								for="nomeConvidado" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="150" id="nomeConvidado"
+								value="#{consultaConvidadoController.filtro.nome}" />
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.sexo']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio
+								value="#{consultaConvidadoController.filtro.sexo}"
+								converter="sexoConverter">
+								<f:selectItems
+									value="#{consultaConvidadoController.sexoMasculinoFemininoEnum}"
+									var="sexo" itemLabel="#{msg[sexo.label]}"
+									itemValue="#{sexo.valor}" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.cargo']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu
+								value="#{consultaConvidadoController.filtro.cargo}"
+								converter="cargoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.cargosDisponiveis}"
+									var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.orgao']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu
+								value="#{consultaConvidadoController.filtro.orgao}"
+								converter="orgaoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									value="#{null}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.orgaosDisponiveis}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.tratamento']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu
+								value="#{consultaConvidadoController.filtro.tratamento}"
+								converter="tratamentoConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.tratamentosDisponiveis}"
+									var="tratamento" itemLabel="#{tratamento.nome}"
+									itemValue="#{tratamento}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.poder.area']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu
+								value="#{consultaConvidadoController.filtro.poderArea}"
+								converter="poderAreaConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.poderAreaDisponiveis}"
+									var="poderArea" itemLabel="#{poderArea.nome}"
+									itemValue="#{poderArea}" />
+							</p:selectOneMenu>							
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.esfera']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu
+								value="#{consultaConvidadoController.filtro.esfera}"
+								converter="esferaConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems
+									value="#{consultaConvidadoController.parametros.esferasDisponiveis}"
+									var="esfera" itemLabel="#{esfera.nome}" itemValue="#{esfera}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.uf']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="2" id="uf"
+								value="#{consultaConvidadoController.filtro.uf}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.cidade']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText maxlength="200" id="nomeCidade"
+								value="#{consultaConvidadoController.filtro.cidade}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label"></div>
+						<div class="col-sm-9">
+							<p:selectBooleanCheckbox
+								value="#{consultaConvidadoController.filtro.presencaConfirmada}" />
+							<h:outputText
+								value="#{msg['label.participante.presenca.confirmada']}"
+								style="margin-right:5px" />
+							<br />
+							<p:selectBooleanCheckbox
+								value="#{consultaConvidadoController.filtro.presencaNaoConfirmada}" />
+							<h:outputText
+								value="#{msg['label.participante.presenca.nao.confirmada']}"
+								style="margin-right:5px" />
+						</div>
+					</div>
+
+				</div>
+			</p:panel>
+			<!-- FIM DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+
+			<!-- INICIO DOS BOTÕES DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false" update="@form"
+							action="#{consultaConvidadoController.comandoPesquisar()}" />
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false"
+							actionListener="#{consultaConvidadoController.comandoLimpar()}"
+							styleClass="btn btn-default" />
+						<p:commandButton id="btnPesquisaAvancada"
+							value="#{msg['botao.pesquisa.avancada']}" ajax="false"							
+							styleClass="btn btn-default" />	
+						<!-- p:commandButton id="btnPesquisaAvancada"
+							value="#{msg['botao.pesquisa.avancada']}" ajax="false"
+							action="#{consultaConvidadoController.pesquisarParticipanteAvancado()}"
+							styleClass="btn btn-default" /-->						
+						<p:commandButton id="btnClassificarLista"
+							value="#{msg['botao.classificar.lista']}" ajax="false"
+							action="#{tipoEventoController.comandoLimpar()}"
+							styleClass="btn btn-default" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			<!-- FIM DOS BOTÕES DO MÓDULO DE CONSULTA DE CONVIDADOS -->
+
+			<!-- INICIO DO MÓDULO DE LISTA DE CONVIDADOS -->
+			<p:panel id="panelListaConvidados">
+				<div class="form-group col-sm-12">
+
+					<div class="titulos">
+						<h:outputText value="#{msg['manter.lista.convidado.titulo']}" />
+					</div>
+					<br />
+
+					<p:dataTable id="dtTipoEvento" filteredValue="" 
+						styleClass="datatable table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						var="participante"
+						value="#{consultaConvidadoController.listaResultadoPesquisa}"
+						style="text-align: center;">
+							<p:column
+								headerText="#{msg['label.coluna.tabela.nome.convidado']}">
+								<h:outputText value="#{participante.nome}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.titulo']}">
+								<h:outputText value="#{participante.titulo}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.cargo']}">
+								<h:outputText
+									value="#{consultaConvidadoController.obterCargoMaiorPrecedencia(participante).nome}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.nome.orgao']}">
+								<h:outputText
+									value="#{consultaConvidadoController.obterOrgaoMaiorPrecedencia(participante).nome}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.sigla.orgao']}">
+								<h:outputText
+									value="#{consultaConvidadoController.obterOrgaoMaiorPrecedencia(participante).nome}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.situacao']}">
+								<h:outputText
+									value="#{consultaConvidadoController.obterSituacao(participante.situacao)}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.tratamento']}">
+								<h:outputText value="#{participante.tratamento.nome}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.nascimento']}">
+								<h:outputText value="#{participante.dataNascimento}"
+									converter="dateConverter" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.coluna.tabela.nome.conjuge']}">
+								<h:outputText value="#{participante.nomeConjuge}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['label.coluna.tabela.conjuge.autoridade']}">
+								<h:outputText value="#{participante.conjugeAutoridade}" />
+							</p:column>
+
+							<p:column headerText="#{msg['label.acoes']}" width="200">
+								<p:commandButton icon="ui-icon-search" title="Visualizar"
+									action="#{consultaConvidadoController.comandoVisualizar(participante)}"
+									ajax="false">
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-pencil" title="Alterar"
+									action="#{consultaConvidadoController.comandoAlterar(participante)}"
+									ajax="false">
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-trash" title="Excluir"
+									action="#{consultaConvidadoController.comandoExcluir(participante)}"
+									ajax="false">
+								</p:commandButton>
+							</p:column>
+					</p:dataTable>
+					<p:spacer height="20" />
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			<!-- FIM DO MÓDULO DE LISTA DE CONVIDADOS -->
+
+			<!-- INICIO DOS BOTÕES DO MÓDULO DE LISTA DE CONVIDADOS -->
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="well" style="display: block; text-align: center">
+
+						<p:commandButton id="btnIncluirParticNaoCad"
+							value="#{msg['botao.incluir.participante.nao.cadastrado']}"
+							ajax="false"
+							action="#{consultaConvidadoController.incluirParticipanteNaoCadastrado()}" />
+						<p:commandButton id="btnVerificarRegDuplicados"
+							action="#{consultaConvidadoController.comandoVerificarRegistroDuplicado()}"
+							value="#{msg['botao.verificar.registros.duplicados']}"
+							ajax="false" />
+						<p:commandButton id="btnVincularSetorGrupo"
+							value="#{msg['botao.vincular.setor.grupo']}" ajax="false"
+							action="#{consultaConvidadoController.vincularSetorGrupo()}" />
+
+						<br />
+
+						<p:commandButton id="btnGerarEtiqueta"
+							value="#{msg['botao.gerar.etiqueta']}" ajax="false" />
+						<p:commandButton id="btnConfirmarPresencAntec"
+							value="#{msg['botao.confirmar.presenca.antecipada']}"
+							ajax="false" update="formPrincipal" />
+						<p:commandButton id="btnRepresentadopor"
+							value="#{msg['botao.representado.por']}" ajax="false" />
+
+						<br />
+
+						<p:commandButton id="btnRepresentantede"
+							value="#{msg['botao.representante.de']}" ajax="false" />
+						<p:commandButton id="btnConfiramrPresencFisica"
+							value="#{msg['botao.confirmar.presenca.fisica']}" ajax="false" />
+						<p:commandButton id="btnCancelar"
+							action="#{consultaConvidadoController.comandoCancelar()}"
+							value="#{msg['botao.cancelar']}" ajax="false" />
+
+					</div>
+
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:dialog header="Mensagem" id="modalErro"
+				widgetVar="dialogMensagemErro" visible="true"
+				rendered="#{consultaConvidadoController.modalVisivel}" modal="true">
+				<h:outputText id="mensagemSucessoTxt"
+					value="#{consultaConvidadoController.modalMensagem}" />
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+						onclick="PF('dialogMensagemErro').hide();" immediate="true" />
+				</h:panelGroup>
+			</p:dialog>
+			<!-- FIM DOS BOTÕES DO MÓDULO DE LISTA DE CONVIDADOS -->
+
+		</h:form>
+	</ui:define>
+</ui:composition>

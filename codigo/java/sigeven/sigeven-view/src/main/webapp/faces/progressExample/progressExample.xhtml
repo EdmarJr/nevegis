@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['manter.orgao.cargo.label.alterar.titulo']}</ui:define>
+
+	<ui:define name="content">
+
+		<style type="text/css">
+ul.messagesErros {
+	color: red;
+	display: initial;
+}
+
+
+.ui-panelgrid td {
+	border-width: 0;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['manter.orgao.cargo.label.alterar.titulo']}</h2>
+		</div>
+		<div class="clearfix"></div>
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<h3>Ajax ProgressBar</h3>
+			<p:commandButton value="Start" action="#{progressBarView.testando()}"
+				async="true" widgetVar="startButton2">
+				<p:ajax async="true"
+					onstart="PF('pbAjax').start();PF('startButton2').disable()"></p:ajax>
+			</p:commandButton>
+			<p:commandButton value="Cancelar"
+				actionListener="#{progressBarView.progressController.cancel}"
+				oncomplete="PF('pbAjax').cancel();PF('startButton2').enable();" />
+			<br />
+			<br />
+			<p:progressBar widgetVar="pbAjax" ajax="true"
+				value="#{progressBarView.progressController.progress}"
+				labelTemplate="{value}%" styleClass="animated" global="false">
+				<p:ajax event="complete"
+					listener="#{progressBarView.progressController.onComplete('Inclusão Completa')}"
+					update="formPrincipal" oncomplete="startButton2.enable()" />
+			</p:progressBar>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

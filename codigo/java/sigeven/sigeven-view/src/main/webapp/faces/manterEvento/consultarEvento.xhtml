@@ -1,0 +1,224 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['evento.consultar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['evento.consultar.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<!-- Inicio linha input -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.nome']}" for="evento" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText value="#{eventoController.evento.nome}" size="50"
+								id="evento" />
+
+						</div>
+					</div>
+
+					<!-- fim linha input -->
+
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.tipo']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu value="#{eventoController.idTipoEvento}"
+								id="localTipoEvento">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems value="#{eventoController.listaTipoEvento}"
+									var="listaTipoEvento" itemLabel="#{listaTipoEvento.nome}"
+									itemValue="#{listaTipoEvento.id}" />
+							</p:selectOneMenu>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.periodoevento']}" />
+						</div>
+						<div class="col-sm-4">
+							<p:calendar value="#{eventoController.evento.dataInicio}"
+								id="dataInicio" pattern="dd/MM/yyyy">
+								<f:validator validatorId="dataValidator" />
+							</p:calendar>
+							<h:message for="dataInicio" style="color:red" />
+						</div>
+						<p:outputLabel value="#{msg['label.ate']}"
+							styleClass="col-sm-1 control-label" />
+						<div class="col-sm-4">
+							<p:calendar value="#{eventoController.evento.dataFim}"
+								id="dataFim" pattern="dd/MM/yyyy">
+								<f:validator validatorId="dataValidator" />
+							</p:calendar>
+							<h:message for="dataFim" style="color:red" />
+						</div>
+					</div>
+
+
+
+					<!-- Inicio radio -->					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.status']}"
+								style="margin-right:5px" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="status"
+								value="#{eventoController.status}">
+								<f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- 
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.local']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu value="#{eventoController.idLocalEvento}"
+								id="localEvento">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />
+								<f:selectItems value="#{eventoController.listaLocal}" var="listaLocal" itemLabel="#{listaLocal.nome}" itemValue="#{listaLocal.id}" />
+							</p:selectOneMenu>
+
+						</div>
+					</div> -->
+				</div>
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false" update="dtEvento"
+							action="#{eventoController.comandoPesquisar()}"
+							oncomplete="confirmation.show()" />
+
+					
+
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false" action="consultarEvento.xhtml"
+							styleClass="btn btn-default" update="formPrincipal dtEvento" immediate="true" />
+
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['evento.listar.titulo']}" />
+					</div>
+					<br />
+					<p:dataTable id="dtEvento"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}" var="evento"
+						value="#{eventoController.listaEvento}"
+						style="text-align: center;" styleClass="table-responsive">
+
+						<p:column headerText="#{msg['evento.label.nome']}">
+							<h:outputText value="#{evento.nome}" />
+						</p:column>
+
+						<p:column
+							headerText="#{msg['tipo.evento.lista.label.tipoEvento']}">
+							<h:outputText value="#{evento.tipoEvento.nome}" />
+						</p:column>
+
+						<p:column headerText="#{msg['evento.label.local.lista']}">
+							<h:outputText value="#{evento.local.nome}" />
+						</p:column>
+
+						<p:column headerText="#{msg['label.status.lista']}">
+							<h:outputText
+								value="#{evento.statusAtivoInativo}" converter="ConversorStatus"  />
+						</p:column>
+
+						<p:column headerText="#{msg['evento.label.data']}">
+							<h:outputText value="#{evento.dataInicioFormatada}"/>
+							<br />
+							<h:outputText value="#{evento.dataFimFormatada}"/>
+						</p:column>
+
+
+						<p:column headerText="#{msg['label.acoes']}" width="200">
+							<p:commandButton icon="ui-icon-search" title="Visualizar"
+								action="#{eventoController.comandoVisualizar()}" ajax="false">
+								<f:setPropertyActionListener target="#{eventoController.evento}"
+									value="#{evento}" />
+
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-pencil" title="Alterar"
+								action="#{eventoController.comandoAlterar()}" ajax="false">
+								<f:setPropertyActionListener target="#{eventoController.evento}"
+									value="#{evento}" />
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-trash" title="Excluir"
+								action="#{eventoController.comandoExcluir()}" ajax="false">
+								<f:setPropertyActionListener target="#{eventoController.evento}"
+									value="#{evento}" />
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-peoples" title="Listar convidados"
+								action="#{eventoController.comandoListarConvidados()}"
+								ajax="false">
+								<f:setPropertyActionListener target="#{eventoController.evento}"
+									value="#{evento}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnIncluir" ajax="false"
+							value="#{msg['botao.incluir']}" action="manterEvento.xhtml"
+							styleClass="btn btn-primary" update=":formIncluir dialogMensagem" />
+							<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}" styleClass="btn btn-default" disabled="true" />
+					</h:panelGroup>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" widgetVar="dialogMensagem"
+					visible="true" rendered="#{eventoController.exibeMensagem}">
+					<h:outputText value="#{eventoController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							rendered="#{eventoController.sucesso}" ajax="false"
+							action="consultar" immediate="true" />
+						<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}"
+							rendered="#{!eventoController.sucesso}" ajax="true"
+							onclick="dialogMensagem.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+

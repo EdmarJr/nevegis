@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="title">#{msg['manter.orgao.cargo.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<style type="text/css">
+.ui-panelgrid td {
+	border-width: 0;
+}
+</style>
+		<div class="form-group col-sm-12">
+			<h2>#{msg['manter.orgao.cargo.titulo']}</h2>
+		</div>
+	<div class="clearfix"></div>
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+
+			<p:fieldset>
+				<p:panelGrid id="panelGrid1" columns="2" style="width : 100%;">
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cargo']}"
+						for="cargo" />
+					<p:selectOneMenu id="cargo" converter="cargoConverter" disabled="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.cargo}">
+						<f:selectItem noSelectionOption="true" itemLabel="#{msg['combo.selecione']}" itemValue="#{null}" itemDisabled="true"/>
+						<f:selectItems 
+							value="#{exclusaoCargoOrgaoController.obterCargosDisponiveis()}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+						<f:ajax event="change" render="panelGrid2"/>
+					</p:selectOneMenu>
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.nome.orgao']}" for="orgao" />
+					<p:selectOneMenu id="orgao" converter="orgaoConverter" disabled="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao}">
+						<f:selectItem noSelectionOption="true" itemLabel="#{msg['combo.selecione']}" itemValue="#{null}" itemDisabled="true"/>
+						<f:selectItems
+							value="#{exclusaoCargoOrgaoController.obterOrgaosDisponiveis()}" var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}"/>
+						<f:ajax event="change" render="panelGrid2" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:panelGrid id="panelGrid2" columns="2" style="width : 100%;">
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.sigla.orgao']}"
+						for="siglaOrgao" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="siglaOrgao"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.sigla}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.tipo.orgao']}"
+						for="tipoOrgao" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="tipoOrgao"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.tipoOrgao.nome}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.poder.area']}"
+						for="poderArea" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="poderArea"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.poderArea.nome}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.esfera']}"
+						for="esfera" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="esfera"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.esfera.nome}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.endereco.orgao']}"
+						for="endereco" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="endereco"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.endereco}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.complemento']}"
+						for="complemento" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="complemento"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.complementoEndereco}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.bairro']}"
+						for="bairro" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="bairro"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.bairro}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.uf']}"
+						for="uf" />
+					<p:inputText
+						readonly="#{alteracaoCargoOrgaoController.camposSomenteLeitura()}"
+						id="uf"
+						value="#{alteracaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.uf}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cidade']}"
+						for="cidade" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="cidade"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cidade}" />
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.cep']}"
+						for="cep" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="cep"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.cep}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.telefone.comercial']}"
+						for="telefoneComercial" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="telefoneComercial"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.telefoneComercial}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.celular.funcional']}"
+						for="celularFuncional" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="celularFuncional"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.fax}" />					
+					<p:outputLabel value="#{msg['manter.orgao.cargo.label.email']}"
+						for="email" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="email"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.email}" />
+					<p:outputLabel
+						value="#{msg['manter.orgao.cargo.label.pagina.internet']}"
+						for="paginaInternet" />
+					<p:inputText readonly="#{exclusaoCargoOrgaoController.camposSomenteLeitura()}" id="paginaInternet"
+						value="#{exclusaoCargoOrgaoController.participanteOrgaoCargoEvento.orgao.paginaInternet}" />					
+				</p:panelGrid>
+
+				<p:commandButton styleClass="btn btn-primary" value="#{msg['botao.excluir']}" ajax="true" onclick="PF('dialogMensagem').show();" />
+				<p:commandButton value="#{msg['botao.cancelar']}"  action="#{exclusaoCargoOrgaoController.cancelarExclusao()}" />
+			</p:fieldset>
+			<p:dialog header="Mensagem" widgetVar="dialogMensagem" modal="true">
+					<h:outputText id="mensagemAlertaTxt" value="#{exclusaoCargoOrgaoController.mensagemAlerta}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkAlerta" value="#{msg['botao.sim']}" ajax="true" onclick="PF('dialogMensagemSucesso').show();" immediate="true" />
+						<p:commandButton id="btnCancelar" value="#{msg['botao.nao']}" ajax="true" onclick="PF('dialogMensagem').hide();"  immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+			
+			<p:dialog header="Mensagem" widgetVar="dialogMensagemSucesso" modal="true">
+    			<h:outputText id="mensagemSucessoTxt" value="#{exclusaoCargoOrgaoController.mensagemSucesso}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}" ajax="false" action="#{exclusaoCargoOrgaoController.concluir()}" immediate="true" />
+					</h:panelGroup>
+			</p:dialog>
+				
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<style type="text/css">
+		.ui-panelgrid td {
+			border-width: 0;
+		}
+	</style>
+	
+	<ui:define name="content">
+	
+		<div class="form-group col-sm-12">
+			<h2>
+				#{msg['manter.poder.area.consulta.titulo.nome']}
+			</h2>
+		</div>
+	
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel
+								value="#{msg['manter.poder.area.nome']}"
+								for="inputNomePesquisa"  />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="inputNomePesquisa"
+								value="#{consultaPoderAreaController.poderArea.nome}" />
+						</div>
+					</div>
+					
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary"
+							value="#{msg['botao.pesquisar']}"
+							actionListener="#{consultaPoderAreaController.comandoPesquisar()}"
+							ajax="false" />
+						<p:commandButton styleClass="btn btn-default"
+							value="#{msg['botao.limpar']}"
+							actionListener="#{consultaPoderAreaController.comandoLimpar()}"
+							ajax="false" />
+					</div>
+					
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['manter.poder.area.consulta.titulo']}" />
+					</div>
+					<br />
+					
+					<p:dataTable var="orgao" value="#{consultaPoderAreaController.poderAreas}"
+						paginator="true" paginatorPosition="bottom" rows="10"
+						style="text-align: center;" styleClass="table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}">
+							
+						<p:column
+							headerText="#{msg['manter.poder.area.consulta.datatable.titulo.coluna.nome']}">
+							<h:outputText value="#{orgao.nome}" />
+						</p:column>
+							
+						<p:column
+							headerText="#{msg['manter.poder.area.consulta.datatable.titulo.coluna.acoes']}">
+									
+							<p:commandButton icon="ui-icon-search" title="Visualizar"
+									action="#{consultaPoderAreaController.comandoVisualizar()}"
+									ajax="false">
+									<f:setPropertyActionListener
+										target="#{consultaPoderAreaController.poderArea}" value="#{orgao}" />
+							</p:commandButton>
+							
+							<p:commandButton icon="ui-icon-pencil"
+								title="#{msg['title.alterar']}"
+								action="#{consultaPoderAreaController.comandoAlterar(orgao)}"
+								ajax="false" />
+											
+							<p:commandButton icon="ui-icon-trash"
+								title="#{msg['title.excluir']}"
+								action="#{consultaPoderAreaController.comandoExcluir(orgao)}"
+								ajax="false" />
+								
+						</p:column>
+										
+					</p:dataTable>
+				
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton styleClass="btn btn-primary" value="#{msg['botao.incluir']}"
+							action="#{consultaPoderAreaController.comandoIncluir()}" ajax="false" />
+						<p:commandButton value="#{msg['botao.cancelar']}"
+							action="#{consultaPoderAreaController.comandoCancelar()}"
+							immediate="true" ajax="false" />							
+					</h:panelGroup>
+						
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

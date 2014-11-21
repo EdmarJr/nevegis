@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['evento.consultar.titulo']}</ui:define>
+	
+	<style type="text/css">
+		.ui-panelgrid td {
+			border-width: 0;
+		}
+	</style>
+	
+	<ui:define name="content">
+		
+		<h2>
+			#{msg['manter.orgao.consulta.orgao.titulo']}
+		</h2>
+		<br />
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel
+								value="#{msg['manter.orgao.cargo.label.nome.orgao']}"
+								for="inputNomePesquisa" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="inputNomePesquisa"
+								value="#{consultaOrgaoController.orgao.nome}" maxlength="50" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel
+								value="#{msg['manter.orgao.cargo.label.sigla.orgao']}"
+								for="inputSiglaPesquisa" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="inputSiglaPesquisa"
+								value="#{consultaOrgaoController.orgao.sigla}" maxlength="50" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel
+								value="#{msg['manter.orgao.cargo.label.tipo.orgao']}"
+								for="tipoOrgao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="tipoOrgao"
+								value="#{consultaOrgaoController.orgao.tipoOrgao}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}" />
+								<f:selectItems
+									value="#{consultaOrgaoController.parametros.tipoOrgaosDisponiveis}"
+									var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="poderArea"
+								value="#{msg['manter.orgao.cargo.label.poder.area']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="poderArea"
+								value="#{consultaOrgaoController.orgao.poderArea}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}" />
+								<f:selectItems
+									value="#{consultaOrgaoController.parametros.poderAreaDisponiveis}"
+									var="poder" itemLabel="#{poder.nome}" itemValue="#{poder}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="esfera"
+								value="#{msg['manter.orgao.cargo.label.esfera']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera"
+								value="#{consultaOrgaoController.orgao.esfera}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}" />
+								<f:selectItems
+									value="#{consultaOrgaoController.parametros.esferasDisponiveis}"
+									var="esfera" itemLabel="#{esfera.nome}" itemValue="#{esfera}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary"
+							value="#{msg['botao.pesquisar']}"
+							actionListener="#{consultaOrgaoController.comandoPesquisar()}"
+							ajax="false" />
+						<p:commandButton styleClass="btn btn-default"
+							value="#{msg['botao.limpar']}"
+							actionListener="#{consultaOrgaoController.comandoLimpar()}"
+							ajax="false" />
+					</div>
+					
+				</div>
+				
+				<div style="clear: both"></div>
+				
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<div class="titulos">
+						<h:outputText value="#{msg['manter.orgao.consulta.titulo']}" />
+					</div>
+					<br />
+					
+					<p:dataTable var="orgao" value="#{consultaOrgaoController.orgaos}"
+						paginator="true" paginatorPosition="bottom" rows="10"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						style="text-align: center;" styleClass="table-responsive">
+						
+						<p:column
+							headerText="#{msg['manter.orgao.consulta.datatable.titulo.coluna.nome']}">
+							<h:outputText value="#{orgao.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['manter.orgao.consulta.datatable.titulo.coluna.acoes']}">
+							
+							<p:commandButton icon="ui-icon-search"
+								title="#{msg['title.visualizar']}"
+								action="#{consultaOrgaoController.comandoVisualizar(orgao)}"
+								ajax="false" />
+							
+							<p:commandButton icon="ui-icon-pencil"
+								title="#{msg['title.alterar']}"
+								action="#{consultaOrgaoController.comandoAlterar(orgao)}"
+								ajax="false" />
+					
+							<p:commandButton icon="ui-icon-trash"
+								title="#{msg['title.excluir']}"
+								action="#{consultaOrgaoController.comandoExcluir(orgao)}"
+								ajax="false" />
+					
+						</p:column>
+					</p:dataTable>
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton styleClass="btn btn-primary"
+							value="#{msg['botao.incluir']}"
+							action="#{consultaOrgaoController.comandoIncluir()}" ajax="false" />
+						<p:commandButton value="#{msg['botao.cancelar']}"
+							action="#{consultaOrgaoController.comandoCancelar()}"
+							immediate="true" ajax="false" />
+					</h:panelGroup>	
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

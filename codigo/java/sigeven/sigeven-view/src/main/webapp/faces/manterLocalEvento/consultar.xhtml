@@ -1,0 +1,242 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+
+	<ui:define name="title">#{msg['local.evento.pesquisar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['local.evento.pesquisar.titulo']}</h2>
+		</div>
+
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>			
+				<div class="form-group col-sm-12">
+											
+					<!-- Inicio do inputText Local do Evento -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['evento.label.local']}" for="localevento" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="localevento" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Local do Evento -->
+
+					<!-- Inicio do inputText Quantidade de Lugares Disponíveis -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.quantidade.lugares.disponiveis']}" for="lugaresdisponiveis" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="lugaresdisponiveis" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Quantidade de Lugares Disponíveis -->
+
+					<!-- Inicio do inputText Endereço -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.endereco']}" for="endereco" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="endereco" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Endereço -->
+
+					<!-- Inicio do inputText Bairro -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.bairro']}" for="bairro" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="bairro" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Bairro -->
+					
+					<!-- Inicio do inputText UF -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.uf']}" for="uf" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="uf" />
+
+						</div>
+					</div>
+					<!-- fim do inputText UF -->
+
+					<!-- Inicio do inputText CEP -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.cep']}" for="cep" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="cep" />
+
+						</div>
+					</div>
+					<!-- fim do inputText CEP -->
+					
+					<!-- Inicio do inputText Telefone Comercial -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.telefone.comercial']}" for="telefonecomercial" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="telefonecomercial" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Telefone Comercial -->
+
+					<!-- Inicio do inputText FAX -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.celular.funcional']}" for="fax" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="fax" />
+
+						</div>
+					</div>
+					<!-- fim do inputText FAX -->
+					
+					<br />					
+					
+					<!-- Inicio do inputText Área Responsável -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.area.responsavel']}" for="arearesponsavel" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="arearesponsavel" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Área Responsável -->
+					
+					<!-- Inicio do inputText Telefone -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.telefone']}" for="telefone" />
+						</div>
+						<div class="col-sm-4">
+							<p:inputText  size="50"
+								id="telefone" />
+
+						</div>
+					</div>
+					<!-- fim do inputText Telefone -->
+					
+					<!-- Inicio do inputText E-mail -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.lista.convidado.incluir.email']}" for="email" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="email" />
+
+						</div>
+					</div>
+					<!-- fim do inputText E-mail -->
+					
+				</div>
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false"/>
+
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false" styleClass="btn btn-default" immediate="true" />
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['local.evento.lista.titulo']}" />
+					</div>
+					<br />
+					<p:dataTable id="listalocalevento"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}"
+						style="text-align: center;" styleClass="table-responsive">
+
+						<p:column headerText="#{msg['evento.label.local.lista']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column
+							headerText="#{msg['label.coluna.tabela.lugares']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.area.responsavel']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.telefone']}">
+							<h:outputText  />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.email']}">
+							<h:outputText  />
+						</p:column>
+						
+						<p:column headerText="#{msg['label.acoes']}" width="200">
+							
+							<p:commandButton icon="ui-icon-search" title="#{msg['title.visualizar']}" >
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-pencil" title="#{msg['title.alterar']}">
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-trash" title="#{msg['title.excluir']}">
+							</p:commandButton>
+							
+						</p:column>
+
+					</p:dataTable>
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnIncluir" ajax="false"
+							value="#{msg['botao.incluir']}" action="incluir" styleClass="btn btn-primary" />
+						<p:commandButton id="btnCancelar" disabled="true"
+							value="#{msg['botao.cancelar']}" styleClass="btn btn-default" />
+					</h:panelGroup>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+

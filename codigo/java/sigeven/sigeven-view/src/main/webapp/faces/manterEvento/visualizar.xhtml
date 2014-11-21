@@ -1,0 +1,172 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+                xmlns:t="http://java.sun.com/jsf/core">
+    
+    <ui:define name="title">#{msg['evento.visualizar.titulo']}</ui:define>
+
+	<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['evento.visualizar.titulo']}</h2>
+		</div>
+		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			<p:panel>
+			<div class="form-group col-sm-12">
+				<!-- Inicio linha input -->
+					<div class="form-group">
+						<p:outputLabel value="#{msg['evento.label.nome']}" styleClass="col-sm-3 control-label" />
+						<div class="col-sm-9">
+							#{eventoController.evento.nome}
+						</div>
+					</div>
+				
+				<!-- fim linha input -->
+				
+				
+					<div class="form-group">
+						<p:outputLabel value="#{msg['evento.label.tipo']}"
+							styleClass="col-sm-3 control-label" />
+						<div class="col-sm-9">
+						#{eventoController.evento.tipoEvento.descricao}
+
+						</div>
+					</div>			
+				
+					<!-- <div class="form-group">
+						<p:outputLabel value="#{msg['evento.label.local']}"
+							styleClass="col-sm-3 control-label" />
+						<div class="col-sm-9">
+						#{eventoController.evento.local.nome}
+
+						</div>
+					</div> -->
+					
+					<div class="form-group">
+						<p:outputLabel value="#{msg['evento.label.periodoevento']}"
+							styleClass="col-sm-3 control-label" />
+						<div class="col-sm-4">
+							#{eventoController.evento.dataInicioFormatada}
+						</div>
+						<p:outputLabel value="#{msg['label.ate']}"
+							styleClass="col-sm-1 control-label" />
+						<div class="col-sm-4">
+							#{eventoController.evento.dataFimFormatada}
+						</div>
+					</div>
+					
+					<!-- Inicio radio -->	
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.status']}"
+								style="margin-right:5px" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="status"
+								value="#{eventoController.status}" disabled="true">
+								<f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+					<!-- fim radio -->
+
+					<div class="form-group">
+						<p:outputLabel value="#{msg['label.hora']}" styleClass="col-sm-3 control-label" />
+						#{eventoController.evento.hora}
+					</div>					
+				</div>						
+				<div class="form-group">
+				<div class="col-sm-3 control-label">
+					<p:outputLabel value="#{msg['label.mestre.cerimonia']}" />
+					</div>
+					#{eventoController.evento.mestreCerimoniaSGVEN.nome}
+				</div>
+
+				<div class="form-group">
+				<div class="col-sm-3 control-label">
+					<p:outputLabel value="#{msg['label.responsavel']}" />
+					</div>
+					<div class="col-sm-4">
+						#{eventoController.evento.usuario.nome}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel value="#{msg['label.traducao.libras']}" />
+					</div>					
+					<div class="col-sm-9">
+							<p:selectOneRadio id="traducaoLibra"
+								value="#{eventoController.traducaoLibra}" disabled="true">
+								<f:selectItem itemLabel="#{msg['label.sim']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.nao']}" itemValue="N" />
+							</p:selectOneRadio>
+					</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-3 control-label">
+					<p:outputLabel value="#{msg['label.taquigrafia']}" />
+					</div>					
+					<div class="col-sm-9">
+							<p:selectOneRadio id="taquigrafia"
+								value="#{eventoController.taquigrafia}" disabled="true">
+								<f:selectItem itemLabel="#{msg['label.sim']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.nao']}" itemValue="N" />
+							</p:selectOneRadio>
+					</div>					
+				</div>
+	
+				<p:panel id="panelTable">
+					<div class="form-group col-sm-12">
+						<br />
+						<p:dataTable id="tipoServFornrDataTable"
+							value="#{eventoController.listaServicoPrestadoEvento}"
+							var="servico" emptyMessage="Nenhum registro encontrado."
+							style="text-align: center;" styleClass="table-responsive" >
+
+							<p:column headerText="Tipo de Serviço" >
+									<h:outputText value="#{servico.tipoServicoSGVEN.nome}" />
+							</p:column>
+
+							<p:column headerText="Fornecedor" >
+									<h:outputText value="#{servico.fornecedorSGVEN.nome}" />
+							</p:column>
+						</p:dataTable>
+					</div>
+				</p:panel>
+
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel value="#{msg['evento.label.custoFinal']}" />
+					</div>
+					<div class="col-sm-3">
+						#{eventoController.evento.custoFinal}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel value="#{msg['label.observacoes']}" />
+					</div>
+					<div class="col-sm-3">
+						#{eventoController.evento.observacao}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnVoltar" value="#{msg['botao.voltar']}" ajax="false" action="consultarEvento.xhtml" immediate="true"/>
+					</h:panelGroup>
+				</div>
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
+

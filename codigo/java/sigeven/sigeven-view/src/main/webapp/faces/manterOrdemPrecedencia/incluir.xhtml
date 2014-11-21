@@ -1,0 +1,153 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+	<ui:define name="title">#{msg['ordem.precedencia.incluir.titulo']}</ui:define>	
+	<ui:define name="content">
+	
+		<h2>
+			#{msg['ordem.precedencia.incluir.titulo']}
+		</h2>		
+		
+		<h:form id="formIncluir" styleClass="form-horizontal">
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<!-- Inicio do selectOneMenu Cargo -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['manter.orgao.cargo.label.cargo']}" for="cargo" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="cargo"
+								value="#{ordemPrecedenciaController.cargo}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaCargos}"
+									var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
+							</p:selectOneMenu>					
+						</div>
+						<h:message for="cargo" style="color: red;" />
+					</div>
+					<!-- fim do selectOneMenu Cargo -->					
+					
+					<!-- Inicio do selectOneMenu Órgão -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.orgao']}" for="orgao" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="orgao"
+								value="#{ordemPrecedenciaController.orgao}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaOrgaos}"
+									var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}"/>
+							</p:selectOneMenu>					
+						</div>
+						<h:message for="orgao" style="color: red;" />
+					</div>
+					<!-- fim do selectOneMenu Órgão -->
+											
+					<!-- Inicio do inputText Nível -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.nivel']}" for="nivel" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="nivel" 
+								requiredMessage="#{msg['msg.campo.obrigatorio']}"/>
+						</div>
+						<h:message for="nivel" style="color: red;" />
+					</div>
+					<!-- fim do inputText Nível -->
+
+					<!-- Inicio do inputText Sub-Nível -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.sub.nivel']}" for="subnivel" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText  size="50"
+								id="subnivel"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}"/>
+						</div>
+						<h:message for="subnivel" style="color: red;" />
+					</div>
+					<!-- fim do inputText Sub-Nível -->
+
+					<!-- Inicio do selectOneMenu Poder/Área -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.poder.area']}" for="poderarea" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="poderarea"
+								value="#{ordemPrecedenciaController.poderArea}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"
+									itemValue="#{null}"/>
+								<f:selectItems
+									value="#{ordemPrecedenciaController.listaPoderArea}"
+									var="poderArea" itemLabel="#{poderArea.nome}" itemValue="#{poderArea}"/>
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Poder/Área -->
+					
+					<!-- Inicio do selectOneMenu Esfera -->
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.esfera']}" for="esfera" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" />								
+							</p:selectOneMenu>
+						
+						</div>
+					</div>
+					<!-- fim do selectOneMenu Esfera -->				
+
+				</div>
+
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton id="btnSalvar" value="#{msg['botao.salvar']}"
+						ajax="true"
+						update=":formIncluir" />
+					<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+						ajax="false" action="incluir" immediate="true" />
+					<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}"
+						ajax="false" action="consultar" immediate="true" />
+				</h:panelGroup>
+
+			</p:panel>
+
+			<!-- p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" visible="true"
+					widgetVar="dialogMensagem"
+					rendered="#{tipoEventoController.exibeMensagem}">
+					<h:outputText value="#{tipoEventoController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							rendered="#{tipoEventoController.sucesso}" ajax="false"
+							action="consultar" immediate="true" />
+						<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}"
+							rendered="#{!tipoEventoController.sucesso}" ajax="true"
+							onclick="dialogMensagem.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel-->
+		</h:form> 		 
+	
+	</ui:define>
+</ui:composition>

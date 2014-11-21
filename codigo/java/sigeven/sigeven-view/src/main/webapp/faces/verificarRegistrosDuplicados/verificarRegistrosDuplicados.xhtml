@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml">
+
+	<ui:define name="title">#{msg['registrosduplicados.tabela.titulo']}</ui:define>
+
+	<ui:define name="content">
+<h2>#{msg['registrosduplicados.tabela.titulo']}</h2>
+<br />
+<br />
+
+		<h:form id="formRegistrosDuplicados">
+		
+		
+				<p:dataTable rows="10" paginator="true" emptyMessage="#{msg['msg.msg007.nenhumregistro']}" 
+					value="#{verificarRegistrosDuplicadosController.registrosDuplicados}" paginatorPosition="bottom"
+					var="participanteEvento">
+
+					<p:column
+						headerText="#{msg['registrosduplicados.colunas.label.nomeparticipante']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{participanteEvento.nome}" />
+					</p:column>
+					<p:column 
+						headerText="#{msg['registrosduplicados.colunas.label.cargo']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{verificarRegistrosDuplicadosController.obterCargoMaiorPrecedencia(participanteEvento).nome}" />
+					</p:column>
+					<p:column 
+						headerText="#{msg['registrosduplicados.colunas.label.orgao']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{verificarRegistrosDuplicadosController.obterOrgaoMaiorPrecedencia(participanteEvento).nome}" />
+					</p:column>
+					<p:column
+						headerText="#{msg['registrosduplicados.colunas.label.tipoorgao']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{verificarRegistrosDuplicadosController.obterOrgaoMaiorPrecedencia(participanteEvento).tipoOrgao.nome}" />
+					</p:column>
+					<p:column
+						headerText="#{msg['registrosduplicados.colunas.label.poderarea']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{verificarRegistrosDuplicadosController.obterOrgaoMaiorPrecedencia(participanteEvento).poderArea.nome}" />
+					</p:column>
+					<p:column
+						headerText="#{msg['registrosduplicados.colunas.label.esfera']}"
+						style="text-align: center; width: 40px;">
+						<h:outputText value="#{verificarRegistrosDuplicadosController.obterOrgaoMaiorPrecedencia(participanteEvento).esfera.nome}" />
+					</p:column>
+
+					<p:column
+						headerText="#{msg['registrosduplicados.colunas.label.acoes']}"
+						width="200">
+						<p:commandButton icon="ui-icon-search" title="#{msg['title.visualizar']}"
+							action="#{verificarRegistrosDuplicadosController.comandoVisualizar(participanteEvento)}"
+							ajax="false" />
+
+
+
+
+
+						<p:commandButton icon="ui-icon-pencil" title="#{msg['title.alterar']}"
+							action="#{verificarRegistrosDuplicadosController.comandoAlterar(participanteEvento)}"
+							ajax="false" />
+
+
+
+
+
+						<p:commandButton icon="ui-icon-trash" title="#{msg['title.excluir']}"
+							action="#{verificarRegistrosDuplicadosController.comandoExcluir(participanteEvento)}"
+							ajax="false" />
+
+
+
+					</p:column>
+				</p:dataTable>
+				<br />
+
+				<div class="well" align="center">
+					<p:commandButton value="#{msg['botao.voltar']}"
+						action="#{verificarRegistrosDuplicadosController.comandoVoltar()}"
+						immediate="true" ajax="false" />
+				</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

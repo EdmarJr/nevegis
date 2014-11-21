@@ -1,0 +1,286 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="content">
+	
+		<style type="text/css">
+			.ui-panelgrid td {
+				border-width: 0px;
+			}
+		</style>
+		
+		<h2>
+			#{msg['manter.orgao.alterar.titulo']}
+		</h2>
+		<br />
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="nomeOrgao"
+								value="#{msg['manter.orgao.cargo.label.nome.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="nomeOrgao" required="true"
+								value="#{alteracaoOrgaoController.orgao.nome}"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}"
+								maxlength="50" />
+							<h:message for="nomeOrgao" style="color: red;" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="siglaOrgao"
+								value="#{msg['manter.orgao.cargo.label.sigla.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="siglaOrgao"
+								value="#{alteracaoOrgaoController.orgao.sigla}"
+								maxlength="10" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="tipoOrgao"
+								value="#{msg['manter.orgao.cargo.label.tipo.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-8">
+							<p:selectOneMenu id="tipoOrgao"
+								value="#{alteracaoOrgaoController.orgao.tipoOrgao}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}"/>
+								<f:selectItems
+									value="#{alteracaoOrgaoController.parametros.tipoOrgaosDisponiveis}"
+									var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="col-sm-1">
+							<p:commandButton icon="ui-icon-pencil"
+								title="#{msg['title.alterar']}" immediate="true"
+								action="#{inclusaoTipoOrgaoController.comandoManterTipoOrgao()}"
+								ajax="false" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="poderArea"
+								value="#{msg['manter.orgao.cargo.label.poder.area']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-8">
+							<p:selectOneMenu id="poderArea" required="true"
+								value="#{alteracaoOrgaoController.orgao.poderArea}"
+								converter="genericConverter"
+								requiredMessage="#{msg['msg.campo.obrigatorio']}">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" itemValue="#{null}" />
+								<f:selectItems
+									value="#{alteracaoOrgaoController.parametros.poderAreaDisponiveis}"
+									var="poder" itemLabel="#{poder.nome}" itemValue="#{poder}" />
+							</p:selectOneMenu>
+							<h:message for="poderArea" style="color: red;" />
+						</div>
+						<div class="col-sm-1">
+							<p:commandButton icon="ui-icon-pencil"
+									title="#{msg['title.alterar']}" immediate="true"
+									action="#{inclusaoPoderAreaController.comandoManterPoderArea()}"
+									ajax="false" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="esfera"
+								value="#{msg['manter.orgao.cargo.label.esfera']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneMenu id="esfera"
+								value="#{alteracaoOrgaoController.orgao.esfera}"
+								converter="genericConverter">
+								<f:selectItem itemLabel="#{msg['combo.selecione']}" itemValue="#{null}" />
+								<f:selectItems
+									value="#{alteracaoOrgaoController.parametros.esferasDisponiveis}"
+									var="esfera" itemLabel="#{esfera.nome}" itemValue="#{esfera}" />
+							</p:selectOneMenu>
+						</div>
+					</div>					
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="endereco"
+								value="#{msg['manter.orgao.cargo.label.endereco.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="endereco"
+								value="#{alteracaoOrgaoController.orgao.endereco}"
+								maxlength="250"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="complemento"
+								value="#{msg['manter.orgao.cargo.label.complemento']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="complemento"
+								value="#{alteracaoOrgaoController.orgao.complementoEndereco}"
+								maxlength="250"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="bairro"
+								value="#{msg['manter.orgao.cargo.label.bairro']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="bairro"
+								value="#{alteracaoOrgaoController.orgao.bairro}"
+								maxlength="150"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="uf"
+								value="#{msg['manter.orgao.cargo.label.uf']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="uf"
+								value="#{alteracaoOrgaoController.orgao.uf}"
+								maxlength="2"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="cidade"
+								value="#{msg['manter.orgao.cargo.label.cidade']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="cidade"
+								value="#{alteracaoOrgaoController.orgao.cidade}"
+								maxlength="200"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="cep"
+								value="#{msg['manter.orgao.cargo.label.cep']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputMask id="cep"
+								value="#{alteracaoOrgaoController.orgao.cep}"
+								maxlength="8" mask="99999999"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="telefoneComercial"
+								value="#{msg['manter.orgao.cargo.label.telefone.comercial']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputMask id="telefoneComercial"
+								value="#{alteracaoOrgaoController.orgao.telefoneComercial}"
+								maxlength="70" mask="(999) 9999-9999"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="fax"
+								value="#{msg['manter.orgao.cargo.label.celular.funcional']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputMask id="fax"
+							value="#{alteracaoOrgaoController.orgao.fax}"
+							maxlength="70" mask="(999) 9999-9999"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="email"
+								value="#{msg['manter.orgao.cargo.label.email']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="email"
+								value="#{alteracaoOrgaoController.orgao.email}"
+								maxlength="200" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="internet"
+								value="#{msg['manter.orgao.cargo.label.pagina.internet']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="internet"
+								value="#{alteracaoOrgaoController.orgao.paginaInternet}"
+								maxlength="200" />
+						</div>
+					</div>
+					
+				</div>	
+			</p:panel>
+			
+			<h:panelGroup style="display:block; text-align:center">
+				<p:commandButton value="#{msg['botao.salvar']}"
+					styleClass="btn btn-primary"
+					actionListener="#{alteracaoOrgaoController.comandoSalvar()}"
+					ajax="false" />
+				<p:commandButton value="#{msg['botao.limpar']}"
+					action="#{alteracaoOrgaoController.comandoLimpar()}" immediate="true"
+					ajax="false" />
+				<p:commandButton value="#{msg['botao.cancelar']}"
+					action="#{alteracaoOrgaoController.comandoCancelar()}"
+					immediate="true" ajax="false" />
+			</h:panelGroup>		
+		
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" modal="true" visible="true"
+					widgetVar="dialogMensagem"
+					rendered="#{alteracaoOrgaoController.exibeMensagem}">
+					<h:outputText value="#{alteracaoOrgaoController.dialogMensagem}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							rendered="#{alteracaoOrgaoController.sucesso}" ajax="false"
+							action="consultarOrgao" immediate="true" />
+						<p:commandButton id="btnOkErro" value="#{msg['botao.ok']}"
+							rendered="#{!alteracaoOrgaoController.sucesso}" ajax="true"
+							onclick="dialogMensagem.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+			</p:outputPanel>
+
+		</h:form>
+	</ui:define>	
+</ui:composition>

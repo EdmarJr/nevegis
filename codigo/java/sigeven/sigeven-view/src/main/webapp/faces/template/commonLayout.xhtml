@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>SIGEVEN - <ui:insert name="title"></ui:insert></title>
+
+	<!-- Bootstrap core CSS -->
+	<ui:param name="basePath" value="#{request.contextPath}/faces" />	
+	<link href="#{basePath}/template/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="#{basePath}/template/bootstrap/css/bootstrapCtis.css"
+		rel="stylesheet" />
+	<link href="#{basePath}/template/bootstrap/css/offcanvas.css" rel="stylesheet" />
+
+	<script src="#{basePath}/template/bootstrap/js/bootstrap.js"></script>
+	<script src="#{basePath}/template/bootstrap/js/offcanvas.js"></script>
+	<script src="#{basePath}/template/bootstrap/js/locale-primefaces.js"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+	<h:outputText escape="false"
+		value="&lt;!--[if lt IE 9]&gt; &lt;script src=&quot;https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt; &lt;![endif]--&gt;"></h:outputText>
+</h:head>
+
+<h:body>
+	<f:view encoding="ISO-8859-1">
+			<f:event type="preRenderView"
+				listener="#{breadCrumbsSessionController.registrarPagina(view.viewId)}" />
+			<f:event type="preRenderView"
+				listener="#{layoutUtils.definirMenuAtivo(breadCrumbsSessionController.paginas)}" />
+		<div id="page">
+			<div id="header">
+				<ui:insert name="header">
+					<ui:include src="commonHeader.xhtml" />
+				</ui:insert>
+			</div>
+			<div id="content">
+				<div class="container">
+					<div class="row row-offcanvas row-offcanvas-left">
+
+						<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+							<div class="list-group">
+									<a href="#{basePath}/manterEvento/consultarEvento.jsf"
+									class="list-group-item #{layoutUtils.isHover('manterEvento')  ? 'active' : ''}">Evento</a> 
+									<a href="#{basePath}/tipoEvento/consultar.jsf"
+									class="list-group-item #{layoutUtils.isHover('tipoEvento')  ? 'active' : ''}">Tipo de Evento</a> 
+									<a href="#{basePath}/manutencao/selecionarEvento.jsf"
+									class="list-group-item #{layoutUtils.isHover('manutencao')  ? 'active' : ''}">Manutenção</a>
+									<!-- a href="#{basePath}/manterOrdemPrecedencia/consultar.jsf"
+									class="list-group-item #{layoutUtils.isHover('manterOrdemPrecedencia')  ? 'active' : ''}">Manter
+									Ordem de Precedência</a -->	
+									<!-- a href="#{basePath}/manterLocalEvento/consultar.jsf"
+									class="list-group-item #{layoutUtils.isHover('manterLocalEvento')  ? 'active' : ''}">Manter
+									Local Evento</a -->								 
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-9">
+
+							<div class="span9">
+								<div class="row-fluid">
+									<div class="form-group col-sm-12">
+										<ui:insert name="content">
+											<ui:include src="commonContent.xhtml" />
+										</ui:insert>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="footer">
+				<div class="container">
+					<ui:insert name="footer">
+						<ui:include src="commonFooter.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+	</f:view>
+</h:body>
+
+</html>

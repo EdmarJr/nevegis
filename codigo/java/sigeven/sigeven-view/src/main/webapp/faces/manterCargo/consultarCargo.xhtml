@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<style type="text/css">
+		.ui-panelgrid td {
+			border-width: 0;
+		}
+	</style>
+	
+	<ui:define name="content">
+	
+		<div class="form-group col-sm-12">
+			<h2>
+				#{msg['manter.cargo.consulta.titulo.nome']}
+			</h2>
+		</div>
+	
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel
+								value="#{msg['manter.cargo.label.field.nome']}"
+								for="inputNomePesquisa" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="inputNomePesquisa"
+								value="#{consultaCargoController.cargo.nome}" />
+						</div>
+					</div>
+					
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary"
+							value="#{msg['botao.pesquisar']}"
+							actionListener="#{consultaCargoController.comandoPesquisar()}"
+							ajax="false" update="formPrincipal" />
+						<p:commandButton styleClass="btn btn-default"
+							value="#{msg['botao.limpar']}"
+							actionListener="#{consultaCargoController.comandoLimpar()}"
+							ajax="false" />
+					</div>
+					
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="titulos">
+						<h:outputText value="#{msg['manter.cargo.consulta.titulo']}" />
+					</div>
+					<br />
+					
+					<p:dataTable var="cargo" value="#{consultaCargoController.cargos}"
+						paginator="true" paginatorPosition="bottom" rows="10"
+						style="text-align: center;" styleClass="table-responsive"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}">
+						
+						<p:column
+							headerText="#{msg['manter.cargo.consulta.datatable.titulo.coluna.nome']}">
+							<h:outputText value="#{cargo.nome}" />
+						</p:column>
+						
+						<p:column
+							headerText="#{msg['manter.cargo.consulta.datatable.titulo.coluna.acoes']}">							
+							<p:commandButton icon="ui-icon-search"
+								title="Visualizar"
+								action="#{consultaCargoController.comandoVisualizar(cargo)}"
+								ajax="false">
+							</p:commandButton>									
+							<p:commandButton icon="ui-icon-pencil"
+								title="#{msg['title.alterar']}"
+								action="#{consultaCargoController.comandoAlterar(cargo)}"
+								ajax="false" />							
+							<p:commandButton icon="ui-icon-trash"
+								title="#{msg['title.excluir']}"
+								action="#{consultaCargoController.comandoExcluir(cargo)}"
+								ajax="false" />								
+						</p:column>
+						
+					</p:dataTable>
+				
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton styleClass="btn btn-primary"
+							value="#{msg['botao.incluir']}"
+							action="#{consultaCargoController.comandoIncluir()}" ajax="false" />
+						<p:commandButton value="#{msg['botao.cancelar']}"
+							action="#{consultaCargoController.comandoCancelar()}"
+							immediate="true" ajax="false" />							
+					</h:panelGroup>
+						
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

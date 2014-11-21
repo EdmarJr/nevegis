@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="content">
+		
+		<style type="text/css">
+			.ui-panelgrid td {
+				border-width: 0px;
+			}
+		</style>
+		
+		<h2>
+			#{msg['manter.tipo.orgao.excluir.titulo']}
+		</h2>
+		
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="nomeOrgao"
+								value="#{msg['manter.tipo.orgao.nome']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText id="nomeOrgao" disabled="true"
+							value="#{exclusaoTipoOrgaoController.tipoOrgao.nome}" />
+							<h:message for="nomeOrgao" style="color: red;" />
+						</div>
+					</div>
+				</div>
+				
+				<h:panelGroup style="display:block; text-align:center">	
+					<p:commandButton value="#{msg['botao.excluir']}" styleClass="btn btn-primary"
+					actionListener="#{exclusaoTipoOrgaoController.setModalAlertaVisivel(true)}"
+					ajax="false" />
+					<p:commandButton value="#{msg['botao.cancelar']}"
+						action="#{exclusaoTipoOrgaoController.comandoCancelar()}"
+						immediate="true" ajax="false" />
+				</h:panelGroup>		
+				
+			</p:panel>
+			
+			<p:outputPanel id="dialogMensagem" layout="block">
+				<p:dialog header="Mensagem" widgetVar="dialogMensagemAlerta"
+					modal="true" visible="true"
+					rendered="#{exclusaoTipoOrgaoController.modalAlertaVisivel}">
+					<h:outputText id="mensagemAlertaTxt"
+						value="#{msg['msg.msg003.confirmarexclusao']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkAlerta" value="#{msg['botao.ok']}"
+							ajax="true" update="@form"
+							actionListener="#{exclusaoTipoOrgaoController.comandoConcluir()}"
+							immediate="true" />
+						<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}"
+							ajax="false"
+							actionListener="#{exclusaoTipoOrgaoController.comandoCancelarModal()}"
+							immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+			
+				<p:dialog header="Mensagem" id="modalSucesso"
+					widgetVar="dialogMensagemSucesso" visible="true"
+					rendered="#{exclusaoTipoOrgaoController.modalSucessoVisivel}"
+					modal="true">
+					<h:outputText id="mensagemSucessoTxt"
+						value="#{msg['msg.msg004.exclusaosucesso']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso" value="#{msg['botao.ok']}"
+							ajax="false"
+							action="#{exclusaoTipoOrgaoController.comandoExcluirComSucesso()}"
+							immediate="true" />
+					</h:panelGroup>
+				</p:dialog>	
+				
+				<p:dialog header="Mensagem1" id="modalSucesso1"
+					widgetVar="dialogMensagemSucesso1" visible="true"
+					rendered="#{exclusaoTipoOrgaoController.seExisteMensagemErro()}"
+					modal="true">
+					<h:outputText id="mensagemSucessoTxt1"
+						value="#{msg['msg.MSG049.cargo.vinculado.participantes']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOkSucesso1" value="#{msg['botao.ok']}"
+							ajax="false"
+							action="consultarTipoOrgao"
+							immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+				
+			</p:outputPanel>				
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

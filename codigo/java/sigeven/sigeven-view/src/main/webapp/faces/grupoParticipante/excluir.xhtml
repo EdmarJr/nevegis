@@ -1,0 +1,69 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+		<ui:define name="title">#{msg['grupoParticipante.evento.excluir.titulo']}</ui:define>
+		
+		<ui:define name="content">
+		
+		<h2>
+			#{msg['grupoParticipante.evento.excluir.titulo']}
+		</h2>		
+		
+			<h:form id="formExcluir">
+				<p:panel>
+					<h:panelGrid columns="3" cellpadding="10">
+						<p:outputLabel for="grupoParticipante" value="#{msg['grupoParticipante.evento.label.grupoParticipante']}" style="float:right;"/>
+						<p:inputText 
+							id="grupoParticipante" 
+							value="#{grupoParticipanteEventoController.grupoParticipante.nome}" 
+							size="30" 
+							disabled="true"
+							requiredMessage="#{msg['msg.campo.obrigatorio']}"/>
+						<h:message for="grupoParticipante" style="color: red;" />
+						
+			
+        				
+					</h:panelGrid>
+					
+   					<h:panelGroup style="display:block; text-align:center">
+           				<p:commandButton id="btnConcluir" value="#{msg['botao.excluir']}" ajax="true" oncomplete="dialogConfirmarExcluir.show()"/>
+           				<p:commandButton id="btnCancelar" value="#{msg['botao.cancelar']}" ajax="false" action="#{grupoParticipanteEventoController.comandoVoltar()}" immediate="true"/>
+       				</h:panelGroup>
+       				
+				</p:panel>
+				
+				<p:outputPanel id="dialogConfirmar" layout="block">
+					<p:dialog header="Mensagem" widgetVar="dialogConfirmarExcluir" modal="true">
+					<h:outputText value="#{msg['msg.msg003.confirmarexclusao']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnConfirmar" value="#{msg['botao.confirmar']}" ajax="true" action="#{grupoParticipanteEventoController.comandoExcluirSalvar()}" oncomplete="dialogConfirmarExcluir.hide()" update=":formExcluir dialogMensagem" />
+						<p:commandButton id="btnCancelar2" value="#{msg['botao.cancelar']}" ajax="true" oncomplete="dialogConfirmarExcluir.hide()" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+				
+				<p:outputPanel id="dialogMensagem" layout="block">
+					<p:dialog header="Mensagem" modal="true" visible="true" rendered="#{grupoParticipanteEventoController.exibeMensagem}">
+					<h:outputText value="#{msg['msg.msg004.exclusaosucesso']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOk" value="#{msg['botao.ok']}" ajax="false" action="#{grupoParticipanteEventoController.comandoVoltar()}" immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+				
+				<p:outputPanel id="dialogMensagemNaoExcluida" layout="block">
+					<p:dialog header="Mensagem" modal="true" visible="true" rendered="#{grupoParticipanteEventoController.exibeMensagemNaoExclusao}">
+					<h:outputText value="#{msg['msg.MSG041.impossivelExcluirgrupoParticipante']}" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnOk2" value="#{msg['botao.ok']}" ajax="false" action="#{grupoParticipanteEventoController.comandoVoltar()}" immediate="true" />
+					</h:panelGroup>
+				</p:dialog>
+				</p:outputPanel>
+			</h:form>
+	</ui:define>			
+</ui:composition>

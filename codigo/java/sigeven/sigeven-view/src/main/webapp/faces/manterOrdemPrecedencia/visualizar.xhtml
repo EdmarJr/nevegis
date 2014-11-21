@@ -1,0 +1,59 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+		<ui:define name="title">#{msg['ordem.precedencia.visualizar.titulo']}</ui:define>
+		
+		<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['ordem.precedencia.visualizar.titulo']}</h2>
+		</div>
+		
+		<h:form id="formVisualizar" styleClass="form-horizontal">
+
+			<div class="form-group col-sm-12">
+
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel for="tipoEvento"
+							value="#{msg['tipo.evento.label.tipoEvento']}" />
+					</div>
+					<div class="col-sm-9">
+						<h:outputText id="tipoEvento"
+							value="#{tipoEventoController.tipoEvento.nome}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel for="descricao" value="#{msg['label.descricao']}" />
+					</div>
+					<div class="col-sm-9">
+						<h:outputText id="descricao"
+							value="#{tipoEventoController.tipoEvento.descricao}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3 control-label">
+						<p:outputLabel for="status" value="#{msg['label.status']}" />
+					</div>
+					<div class="col-sm-9">
+						<h:outputText id="status"
+							value="#{tipoEventoController.tipoEvento.ativo}"
+							converter="ConversorStatus" />
+					</div>
+				</div>
+
+			</div>
+			<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnVoltar" value="#{msg['botao.voltar']}" ajax="false" action="consultar" immediate="true"/>
+					</h:panelGroup>
+					
+				
+			</h:form>
+		</ui:define>
+</ui:composition>

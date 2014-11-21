@@ -1,0 +1,120 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+template="../template/commonLayout.xhtml">
+
+		<ui:define name="title">#{msg['tipo.evento.consultar.titulo']}</ui:define>
+
+		<ui:define name="content">
+		<div class="form-group col-sm-12">
+			<h2>#{msg['tipo.evento.consultar.titulo']}</h2>
+		</div>
+		
+			<h:form styleClass="form-horizontal">
+			<p:panel>
+				<div class="form-group col-sm-12">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="tipoEvento"
+								value="#{msg['tipo.evento.label.tipoEvento']}" />
+						</div>
+						<div class="col-sm-9">
+							<p:inputText id="tipoEvento" size="30"
+								value="#{tipoEventoController.tipoEvento.nome}" maxlength="100" />
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel value="#{msg['label.status']}"
+								style="margin-right:5px" />
+						</div>
+						<div class="col-sm-9">
+							<p:selectOneRadio id="status"
+								value="#{tipoEventoController.tipoEvento.ativo}">
+								<f:selectItem itemLabel="#{msg['label.ativo']}" itemValue="S" />
+								<f:selectItem itemLabel="#{msg['label.inativo']}" itemValue="N" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+
+					<div class="well">
+						<p:commandButton styleClass="btn btn-primary" id="btnPesquisar"
+							value="#{msg['botao.pesquisar']}" ajax="false"
+							update="formPrincipal"
+							action="#{tipoEventoController.comandoPesquisar()}" />
+						<p:commandButton id="btnLimpar" value="#{msg['botao.limpar']}"
+							ajax="false" action="#{tipoEventoController.comandoLimpar()}"
+							styleClass="btn btn-default" />
+					</div>
+				</div>
+
+
+				<div style="clear: both"></div>
+
+
+			</p:panel>
+
+
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<div class="titulos">
+						<h:outputText value="#{msg['tipo.evento.lista.titulo']}" />
+					</div>
+					<br />
+					
+					<p:dataTable id="dtTipoEvento"
+						emptyMessage="#{msg['msg.msg007.nenhumregistro']}" var="te"
+						value="#{tipoEventoController.listaTipoEvento}"
+						style="text-align: center;" styleClass="table-responsive">
+
+						<p:column
+							headerText="#{msg['tipo.evento.lista.label.tipoEvento']}">
+							<h:outputText value="#{te.nome}" />
+						</p:column>
+
+						<p:column headerText="#{msg['label.coluna.tabela.status']}">
+							<h:outputText value="#{te.statusAtivoInativo}" converter="ConversorStatus" />
+						</p:column>
+
+						<p:column headerText="#{msg['label.acoes']}"
+							width="200">
+							<p:commandButton icon="ui-icon-search" title="Visualizar"
+								action="#{tipoEventoController.comandoVisualizar()}"
+								ajax="false">
+								<f:setPropertyActionListener
+									target="#{tipoEventoController.tipoEvento}" value="#{te}" />
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-pencil" title="Alterar"
+								action="#{tipoEventoController.comandoAlterar()}" ajax="false">
+								<f:setPropertyActionListener
+									target="#{tipoEventoController.tipoEvento}" value="#{te}" />
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Excluir"
+								action="#{tipoEventoController.comandoExcluir()}" ajax="false">
+								<f:setPropertyActionListener
+									target="#{tipoEventoController.tipoEvento}" value="#{te}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+					<p:spacer height="20" />
+					<h:panelGroup style="display:block; text-align:center">
+						<p:commandButton id="btnIncluir" ajax="false"
+							value="#{msg['botao.incluir']}" action="incluir" styleClass="btn btn-primary" />
+						<p:commandButton id="btnCancelar" disabled="true"
+							value="#{msg['botao.cancelar']}" styleClass="btn btn-default" />
+					</h:panelGroup>
+				</div>
+				<div style="clear: both"></div>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

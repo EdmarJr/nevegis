@@ -1,0 +1,74 @@
+  Informações para ajudar na leitura dos softwares e documentos entregues para o 
+  sistema SISVAM
+  ==============================================================================
+  
+  Visão Geral do SISVAM
+  --------------------- 
+  Esta OS visa responder ao levantamento de chamados técnicos, de setembro a 
+  dezembro de 2013, efetuado pela Seção de Atendimento Remoto, que mostrou dentre 
+  os serviços prestados aos clientes externos um percentual maior de 50% para os 
+  problemas de configuração do ambiente técnico remoto do usuário. Mesmo esse 
+  ambiente não sendo de responsabilidade do STJ, os erros nele inviabilizam o uso 
+  dos serviços do site do STJ para prover e enviar informações para o Processo 
+  Judicial Eletrônico desta corte. Por essa razão, a seção de Atendimento Remoto dedica 
+  um esforço considerado de tempo e pesquisa para solucionar os problemas identificados 
+  junto ao usuário. A maioria dos problemas identificados, por serem recorrentes, já 
+  foi catalogada pela equipe do STJ. A OS visa criar uma ferramenta de diagnóstico do 
+  ambiente técnico do usuário para que os problemas identificados possam ser solucionados 
+  por ele mesmo com sugestões do sistema. O sistema também deve alimentar um banco de 
+  dados estatístico de informações desse ambiente técnico do usuário para que ele possa 
+  sofrer evolução de novas técnicas de diagnóstico e que também possa ser consultado pela 
+  equipe técnica para informações aos usuários externos do melhor ambiente de uso do sistema.
+  
+  A forma proposta de atendimento é desenvolver o sistema SISVAM para a plataforma 
+  tecnológica Java, utilizando servidor de aplicação (e web) JBOSS EAP 6.0, Banco de Dados 
+  DB2 e o uso de Applets.
+  
+  Observações
+  -----------
+  A documentação enviada pelo STJ não contempla requisitos do módulo de administração
+  do SISVAM. Portanto, os requisitos desse módulo devem ser levantados juntamente com
+  as funcionalidades já identificadas no módulo de execução da validação do ambiente 
+  do usuário.
+  O modelo de dados presente no documento "3.4.modelo_de_dados.pdf" não está completo
+  e não abrange as necessidades da Seção de Atendimento Remoto sobre as respostas que
+  eles precisam para melhorar o atendimento e suporte prestado aos usuários. 
+  Podemos considerar que esta documentação é um rascunho ou minuta de tudo aquilo
+  que desejamos no SISVAM, mas que ainda precisa de respostas aos questionamentos
+  e dúvidas técnicas (prova de conceito) que precisam ser sanadas para darmos anda-
+  mento ao amadurecimento dos requisitos do módulo de administração.
+  
+
+O conteúdo deste CD foi dividido em duas partes:
+------------------------------------------------
+
+   1 - A pasta "biblioteca_de_criptografia" - Contém a biblioteca criptográfica 
+       ICP-Bravo que será utilizada para efetuar as validações de regras do 
+	   ICP-Brasil para o certificado digital utilizado no sistema.
+     1.1 - A pasta "doc" da biblioteca criptográfica possui um conjunto de PPTs
+	       que orientam sobre o que é a biblioteca criptográfica, sua arquitetura
+		   e forma de trabalho com as APIs através do site HTML que orienta o seu
+		   uso.
+     1.2 - A pasta "samples" possui um conjunto de exemplos de uso da  biblioteca 
+	       criptográfica e uso de suas APIs.
+
+   2 - A pasta "documentacao" - Contém documentos, diagramas, mapas mentais para
+       ajudar no entendimento do que será o sistema.
+     2.1 - O arquivo "1.chamados_ambiente_certificacao_digital_2013.docx" - Contém 
+	       informações da síntese dos chamados técnicos mais recorrentes sobre o 
+		   suporte técnico prestado pela Seção de Atendimento Remoto para os ad-
+		   vogados que utilizam o sistema de Peticionamento Eletrônico com cer-
+		   tificação digital.
+     2.2 - O arquivo "2.mapa_mental_ideias_gerais_do_projeto.pdf" - Contém o mapa
+	       mental com as idéias gerais para o SISVAL. 
+     2.3 - Os outros arquivos foram criada para ajudarem no detalhamento do projeto.
+		   
+		   
+Contato do STJ:
+---------------
+     Nome: Luiz Claudio Soares de Almeida
+	 e-mail: lalmeida@stj.jus.br
+	 telefones de contato: (61) 3319-9622 [stj]
+	                       (61) 8151-7295 [celular]
+  
+		   

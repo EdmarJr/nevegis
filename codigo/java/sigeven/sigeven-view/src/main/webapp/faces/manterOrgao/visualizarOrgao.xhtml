@@ -1,0 +1,217 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/commonLayout.xhtml"
+	xmlns:t="http://java.sun.com/jsf/core">
+	
+	<ui:define name="content">
+	
+		<style type="text/css">
+			.ui-panelgrid td {
+				border-width: 0px;
+			}
+		</style>
+		
+		<h2>
+			#{msg['manter.orgao.visualizar.titulo']}
+		</h2>
+		<br />
+		<h:form id="formPrincipal" styleClass="form-horizontal">
+			
+			<p:panel>
+				<div class="form-group col-sm-12">
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="nomeOrgao"
+								value="#{msg['manter.orgao.cargo.label.nome.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="nomeOrgao"
+								value="#{visualizacaoOrgaoController.orgao.nome}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="siglaOrgao"
+								value="#{msg['manter.orgao.cargo.label.sigla.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="siglaOrgao"
+								value="#{visualizacaoOrgaoController.orgao.sigla}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="tipoOrgao"
+								value="#{msg['manter.orgao.cargo.label.tipo.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText id="tipoOrgao" disabled="true"
+								value="#{visualizacaoOrgaoController.orgao.tipoOrgao.nome}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="poderArea"
+								value="#{msg['manter.orgao.cargo.label.poder.area']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText id="poderArea" disabled="true"
+								value="#{visualizacaoOrgaoController.orgao.poderArea.nome}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="esfera"
+								value="#{msg['manter.orgao.cargo.label.esfera']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText  id="esfera"
+								value="#{visualizacaoOrgaoController.orgao.esfera.nome}"/>
+						</div>
+					</div>					
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="endereco"
+								value="#{msg['manter.orgao.cargo.label.endereco.orgao']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="endereco"
+								value="#{visualizacaoOrgaoController.orgao.endereco}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="complemento"
+								value="#{msg['manter.orgao.cargo.label.complemento']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="complemento"
+								value="#{visualizacaoOrgaoController.orgao.complementoEndereco}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="bairro"
+								value="#{msg['manter.orgao.cargo.label.bairro']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="bairro"
+								value="#{visualizacaoOrgaoController.orgao.bairro}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="uf"
+								value="#{msg['manter.orgao.cargo.label.uf']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="uf"
+								value="#{visualizacaoOrgaoController.orgao.uf}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="cidade"
+								value="#{msg['manter.orgao.cargo.label.cidade']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="cidade"
+								value="#{visualizacaoOrgaoController.orgao.cidade}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="cep"
+								value="#{msg['manter.orgao.cargo.label.cep']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="cep"
+								value="#{visualizacaoOrgaoController.orgao.cep}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="telefoneComercial"
+								value="#{msg['manter.orgao.cargo.label.telefone.comercial']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="telefoneComercial"
+								value="#{visualizacaoOrgaoController.orgao.telefoneComercial}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="fax"
+								value="#{msg['manter.orgao.cargo.label.celular.funcional']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="fax"
+							value="#{visualizacaoOrgaoController.orgao.fax}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="email"
+								value="#{msg['manter.orgao.cargo.label.email']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="email"
+								value="#{visualizacaoOrgaoController.orgao.email}"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-3 control-label">
+							<p:outputLabel for="internet"
+								value="#{msg['manter.orgao.cargo.label.pagina.internet']}" 
+								style="float:right;" />
+						</div>
+						<div class="col-sm-9">
+							<h:outputText disabled="true" id="internet"
+								value="#{visualizacaoOrgaoController.orgao.paginaInternet}"/>
+						</div>
+					</div>
+					
+				</div>	
+			</p:panel>
+			
+			<h:panelGroup style="display:block; text-align:center">
+				<p:commandButton value="#{msg['botao.voltar']}"
+					action="#{visualizacaoOrgaoController.comandoVoltar()}"
+					ajax="false" immediate="true" />
+			</h:panelGroup>	
+			
+		</h:form>
+	</ui:define>	
+</ui:composition>
